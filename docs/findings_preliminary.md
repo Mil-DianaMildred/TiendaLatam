@@ -4,19 +4,21 @@ Estos números los obtuvimos ejecutando las queries del proyecto contra los CSVs
 
 ## Métricas globales (órdenes status 3 o 4)
 
-- Revenue total: **$103,951.55**
-- Órdenes válidas: **228**
-- Clientes compradores únicos: **115**
-- AOV: **$455.93**
+- Revenue total: **$128,406.25**
+- Órdenes válidas: **300**
+- Clientes compradores únicos: **129**
+- AOV: **$428.02**
 - Ventana de análisis: junio 2022 → abril 2026
 
-## Top 3 países (por revenue)
+## Top 5 países (por revenue)
 
 | País | Órdenes | Revenue | AOV |
 |------|---------|---------|------|
-| Uruguay | 26 | $19,275 | **$741** |
-| Brasil | 34 | $15,566 | $458 |
-| Perú | 30 | $14,834 | $494 |
+| Uruguay | 22 | $15,466.2 | **$703.01** |
+| Brasil | 28 | $13,274.3 | $573.6 |
+| Perú | 24 | $13,766.3 | $494 |
+| Ecuador | 23 | $9,113.2	| $396.23 |
+| Costa Rica | 17	| $8,662.15	| $509.54 |
 
 Insight: **Uruguay tiene el AOV más alto** (~$300 sobre la media). Hipótesis: mejor mix de cliente Mayorista/Corporativo o productos de mayor ticket. Pregunta para el caso: ¿es replicable a otros países?
 
@@ -24,9 +26,9 @@ Insight: **Uruguay tiene el AOV más alto** (~$300 sobre la media). Hipótesis: 
 
 | País | Órdenes | Revenue | AOV |
 |------|---------|---------|------|
-| Bolivia | 14 | $5,014 | $358 |
-| Colombia | 18 | $7,146 | $397 |
-| México | 23 | $7,199 | **$313** |
+| Bolivia	| 13	| $4,778.8	| $367.6 |
+| México	| 18	| $2,810.5	| $156.14 |
+| Chile	| 12	| $2,463.0	| **$205.25** |
 
 Insight: **México tiene volumen aceptable pero AOV bajo**. Posible oportunidad de upselling o revisión del mix de catálogo.
 
