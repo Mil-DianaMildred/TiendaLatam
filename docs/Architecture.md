@@ -1,4 +1,4 @@
-# Arquitectura del proyecto
+# Arquitectura
 
 Este documento explica cómo está organizado el proyecto técnicamente: qué herramienta hace qué, por qué la elegimos y cómo fluye la información de los CSVs hasta el dashboard publicado en tu website. Está pensado para que tú lo entiendas profundamente (sirve como práctica de pensamiento de arquitectura PM)
 
