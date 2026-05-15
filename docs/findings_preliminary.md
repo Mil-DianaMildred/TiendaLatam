@@ -38,7 +38,7 @@ Insight: **México tiene volumen aceptable pero AOV bajo**. Posible oportunidad 
 |----------|----------|---------|-----------|
 | **Champions**	| **25**	| **$41,255.0**	| **39.7** |
 | Needs Attention	| 17	| $22,201.0	| 21.4 |
-| Loyal	32 |	19,239.0	| $18.5 |
+| Loyal	| 32 |	19,239.0	| $18.5 |
 | At Risk	| 7	| 9,453.0	| $9.1 |
 | Lost	| 17	| 4538.0	| $4.4 |
 | Hibernating	| 5	| $4,119.0	| 4.0 |
