@@ -48,6 +48,9 @@ Insight principal del proyecto: **25 clientes (~25% de la base activa) generan e
 
 Insight secundario: **At Risk + Hibernating + Lost = 24 clientes que ya generaron $14,000 en revenue histórico y hoy no están comprando**. Esa es la oportunidad de retención más clara del negocio.
 
+
+**PENDING REVIEW**
+
 ## Salud del funnel
 
 - **Churn rate (180+ días sin comprar)**: **44.7%**
