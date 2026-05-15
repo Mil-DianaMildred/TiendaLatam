@@ -1,6 +1,6 @@
-# Roadmap — 5 días para un MVP de portafolio PM
+# Roadmap — 5 días
 
-Este plan está diseñado para terminar el proyecto en una semana laboral (3-5 días intensos o ~2 horas diarias por una semana). Cada día tiene un entregable claro y un "by end of day you should have" para que sepas exactamente cuándo cerrar.
+Este plan está diseñado para terminar el proyecto en una semana laboral (3-5 días intensos o ~2 horas diarias por una semana). Cada día tiene un entregable claro y un "by end of day you should have".
 
 Pensamiento de fondo: este proyecto no es un ejercicio de SQL, es un caso de estudio de Product Management. Cada query debe responder a una pregunta de negocio, y cada visual del dashboard debe llevar a una decisión accionable.
 
@@ -107,19 +107,6 @@ Tip PM: el storytelling pesa más que la técnica. Un análisis perfecto sin nar
 
 ---
 
-## Cómo este proyecto fortalece tu perfil PM
-
-Lo que demuestra cada parte:
-
-| Skill PM | Dónde lo demuestras |
-|----------|---------------------|
-| Data fluency | Queries SQL no triviales (cohortes, RFM, ventanas) |
-| Definición de métricas | North Star Metric justificada + KPI hierarchy |
-| Pensamiento de negocio | Hallazgos accionables, no descripciones |
-| Segmentación de usuarios | RFM + caracterización de personas |
-| Priorización | Frameworks RICE/ICE en las recomendaciones |
-| Storytelling | Caso de estudio en website |
-| Stakeholder communication | Dashboard ejecutivo con jerarquía clara |
 
 ## Extensiones opcionales (si te sobra tiempo)
 
