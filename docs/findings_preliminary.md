@@ -36,18 +36,17 @@ Insight: **México tiene volumen aceptable pero AOV bajo**. Posible oportunidad 
 
 | Segmento | Clientes | Revenue | % Revenue |
 |----------|----------|---------|-----------|
-| **Champions** | 26 | $41,785 | **40.2%** |
-| Needs Attention | 21 | $23,349 | 22.5% |
-| At Risk | 10 | $12,576 | 12.1% |
-| New/Promising | 13 | $12,432 | 12.0% |
-| Loyal | 18 | $6,277 | 6.0% |
-| Hibernating | 11 | $4,078 | 3.9% |
-| About to Sleep | 8 | $2,000 | 1.9% |
-| Lost | 8 | $1,455 | 1.4% |
+| **Champions**	| **25**	| **$41,255.0**	| **39.7** |
+| Needs Attention	| 17	| $22,201.0	| 21.4 |
+| Loyal	32 |	19,239.0	| $18.5 |
+| At Risk	| 7	| 9,453.0	| $9.1 |
+| Lost	| 17	| 4538.0	| $4.4 |
+| Hibernating	| 5	| $4,119.0	| 4.0 |
+| About to Sleep |	12	| $3,148.0	| 3.0 |
 
-Insight principal del proyecto: **26 clientes (23% de la base activa) generan el 40% del revenue**. La regla de Pareto se cumple ligeramente sub-amplificada porque el dataset es relativamente joven y pequeño.
+Insight principal del proyecto: **25 clientes (~25% de la base activa) generan el 40% del revenue**. La regla de Pareto se cumple ligeramente sub-amplificada porque el dataset es relativamente joven y pequeño.
 
-Insight secundario: **At Risk + Hibernating + Lost = 29 clientes que ya generaron $18,000 en revenue histórico y hoy no están comprando**. Esa es la oportunidad de retención más clara del negocio.
+Insight secundario: **At Risk + Hibernating + Lost = 24 clientes que ya generaron $14,000 en revenue histórico y hoy no están comprando**. Esa es la oportunidad de retención más clara del negocio.
 
 ## Salud del funnel
 
