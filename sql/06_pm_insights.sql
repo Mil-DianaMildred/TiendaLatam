@@ -9,10 +9,10 @@ WITH product_revenue AS (
     p.product_name,
     ca.name AS category,
     COALESCE(SUM(od.quantity * od.unit_price), 0) AS revenue
-  FROM `tiendalatam-portfolio.tiendalatam.products` p
-  JOIN `tiendalatam-portfolio.tiendalatam.categories` ca ON p.category_id = ca.category_id
-  LEFT JOIN `tiendalatam-portfolio.tiendalatam.order_details` od ON p.product_id = od.product_id
-  LEFT JOIN `tiendalatam-portfolio.tiendalatam.orders` o ON od.order_id = o.order_id AND o.order_status_id IN (3, 4)
+  FROM `tiendalatam-casestudy.tiendalatam.products` p
+  JOIN `tiendalatam-casestudy.tiendalatam.categories` ca ON p.category_id = ca.category_id
+  LEFT JOIN `tiendalatam-casestudy.tiendalatam.order_details` od ON p.product_id = od.product_id
+  LEFT JOIN `tiendalatam-casestudy.tiendalatam.orders` o ON od.order_id = o.order_id AND o.order_status_id IN (3, 4)
   GROUP BY p.product_id, p.product_name, ca.name
 ),
 ranked AS (
@@ -46,11 +46,11 @@ SELECT
   COUNT(o.order_id) AS orders_handled,
   ROUND(SUM(o.total_amount), 2) AS revenue_generated,
   ROUND(AVG(o.total_amount), 2) AS aov
-FROM `tiendalatam-portfolio.tiendalatam.employees` e
-JOIN `tiendalatam-portfolio.tiendalatam.locations` l    ON e.location_id = l.location_id
-JOIN `tiendalatam-portfolio.tiendalatam.countries` co   ON l.country_id = co.country_id
-JOIN `tiendalatam-portfolio.tiendalatam.positions` pos  ON e.employee_position = pos.position_id
-LEFT JOIN `tiendalatam-portfolio.tiendalatam.orders` o
+FROM `tiendalatam-casestudy.tiendalatam.employees` e
+JOIN `tiendalatam-casestudy.tiendalatam.locations` l    ON e.location_id = l.location_id
+JOIN `tiendalatam-casestudy.tiendalatam.countries` co   ON l.country_id = co.country_id
+JOIN `tiendalatam-casestudy.tiendalatam.positions` pos  ON e.employee_position = pos.position_id
+LEFT JOIN `tiendalatam-casestudy.tiendalatam.orders` o
   ON e.employee_id = o.employee_id AND o.order_status_id IN (3, 4)
 GROUP BY l.name, co.name, e.name, e.last_name, pos.name
 ORDER BY revenue_generated DESC NULLS LAST;
@@ -59,7 +59,7 @@ ORDER BY revenue_generated DESC NULLS LAST;
 -- Q13. Productos con riesgo de quiebre de stock
 WITH max_date AS (
   SELECT MAX(registration_date) AS snapshot
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
 ),
 product_demand AS (
   SELECT
@@ -73,10 +73,10 @@ product_demand AS (
       CASE WHEN o.registration_date >= DATE_SUB((SELECT snapshot FROM max_date), INTERVAL 90 DAY)
            THEN od.quantity ELSE 0 END
     ), 0) AS units_sold_last_90d
-  FROM `tiendalatam-portfolio.tiendalatam.products` p
-  JOIN `tiendalatam-portfolio.tiendalatam.categories` ca ON p.category_id = ca.category_id
-  LEFT JOIN `tiendalatam-portfolio.tiendalatam.order_details` od ON p.product_id = od.product_id
-  LEFT JOIN `tiendalatam-portfolio.tiendalatam.orders` o ON od.order_id = o.order_id AND o.order_status_id IN (3, 4)
+  FROM `tiendalatam-casestudy.tiendalatam.products` p
+  JOIN `tiendalatam-casestudy.tiendalatam.categories` ca ON p.category_id = ca.category_id
+  LEFT JOIN `tiendalatam-casestudy.tiendalatam.order_details` od ON p.product_id = od.product_id
+  LEFT JOIN `tiendalatam-casestudy.tiendalatam.orders` o ON od.order_id = o.order_id AND o.order_status_id IN (3, 4)
   GROUP BY p.product_id, p.product_name, p.stock, p.price, ca.name
 )
 SELECT
@@ -106,8 +106,8 @@ WITH product_pairs AS (
     od1.product_id AS product_a,
     od2.product_id AS product_b,
     COUNT(*) AS pair_count
-  FROM `tiendalatam-portfolio.tiendalatam.order_details` od1
-  JOIN `tiendalatam-portfolio.tiendalatam.order_details` od2
+  FROM `tiendalatam-casestudy.tiendalatam.order_details` od1
+  JOIN `tiendalatam-casestudy.tiendalatam.order_details` od2
     ON od1.order_id = od2.order_id
    AND od1.product_id < od2.product_id
   GROUP BY od1.product_id, od2.product_id
@@ -118,8 +118,8 @@ SELECT
   p2.product_name AS product_b,
   pp.pair_count AS orders_with_both
 FROM product_pairs pp
-JOIN `tiendalatam-portfolio.tiendalatam.products` p1 ON pp.product_a = p1.product_id
-JOIN `tiendalatam-portfolio.tiendalatam.products` p2 ON pp.product_b = p2.product_id
+JOIN `tiendalatam-casestudy.tiendalatam.products` p1 ON pp.product_a = p1.product_id
+JOIN `tiendalatam-casestudy.tiendalatam.products` p2 ON pp.product_b = p2.product_id
 ORDER BY pp.pair_count DESC
 LIMIT 15;
 
@@ -130,7 +130,7 @@ WITH ordered_purchases AS (
     client_id,
     registration_date,
     ROW_NUMBER() OVER (PARTITION BY client_id ORDER BY registration_date) AS purchase_n
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
   WHERE order_status_id IN (3, 4)
 ),
 first_second AS (

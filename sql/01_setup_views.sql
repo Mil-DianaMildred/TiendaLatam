@@ -1,12 +1,12 @@
 -- =====================================================================
 -- Setup de vistas analíticas para Looker Studio
 -- Ejecutar UNA VEZ después de cargar los 11 CSVs en BigQuery.
--- Reemplaza `tiendalatam-portfolio.tiendalatam` con tu propio project.dataset
+-- Reemplaza `tiendalatam-casestudy.tiendalatam` con tu propio project.dataset
 -- =====================================================================
 
 -- Vista 1: Órdenes enriquecidas (joins resueltos)
 -- Es la fuente principal de los dashboards. Filtra solo órdenes válidas.
-CREATE OR REPLACE VIEW `tiendalatam-portfolio.tiendalatam.v_orders_enriched` AS
+CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_orders_enriched` AS
 SELECT
   o.order_id,
   o.client_id,
@@ -23,18 +23,18 @@ SELECT
   l.name AS store_name,
   CONCAT(e.name, ' ', e.last_name) AS employee_full_name,
   pos.name AS employee_position
-FROM `tiendalatam-portfolio.tiendalatam.orders` o
-JOIN `tiendalatam-portfolio.tiendalatam.order_statuses` os ON o.order_status_id = os.order_status_id
-JOIN `tiendalatam-portfolio.tiendalatam.clients` c         ON o.client_id = c.client_id
-JOIN `tiendalatam-portfolio.tiendalatam.client_types` ct   ON c.client_type_id = ct.client_type_id
-JOIN `tiendalatam-portfolio.tiendalatam.countries` co      ON c.country_id = co.country_id
-JOIN `tiendalatam-portfolio.tiendalatam.locations` l       ON o.location_id = l.location_id
-JOIN `tiendalatam-portfolio.tiendalatam.employees` e       ON o.employee_id = e.employee_id
-JOIN `tiendalatam-portfolio.tiendalatam.positions` pos     ON e.employee_position = pos.position_id;
+FROM `tiendalatam-casestudy.tiendalatam.orders` o
+JOIN `tiendalatam-casestudy.tiendalatam.order_statuses` os ON o.order_status_id = os.order_status_id
+JOIN `tiendalatam-casestudy.tiendalatam.clients` c         ON o.client_id = c.client_id
+JOIN `tiendalatam-casestudy.tiendalatam.client_types` ct   ON c.client_type_id = ct.client_type_id
+JOIN `tiendalatam-casestudy.tiendalatam.countries` co      ON c.country_id = co.country_id
+JOIN `tiendalatam-casestudy.tiendalatam.locations` l       ON o.location_id = l.location_id
+JOIN `tiendalatam-casestudy.tiendalatam.employees` e       ON o.employee_id = e.employee_id
+JOIN `tiendalatam-casestudy.tiendalatam.positions` pos     ON e.employee_position = pos.position_id;
 
 
 -- Vista 2: Líneas de pedido con info de producto
-CREATE OR REPLACE VIEW `tiendalatam-portfolio.tiendalatam.v_order_lines` AS
+CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_order_lines` AS
 SELECT
   od.detail_id,
   od.order_id,
@@ -48,17 +48,17 @@ SELECT
   o.registration_date,
   o.order_status_id,
   o.client_id
-FROM `tiendalatam-portfolio.tiendalatam.order_details` od
-JOIN `tiendalatam-portfolio.tiendalatam.products` p    ON od.product_id = p.product_id
-JOIN `tiendalatam-portfolio.tiendalatam.categories` ca ON p.category_id = ca.category_id
-JOIN `tiendalatam-portfolio.tiendalatam.orders` o      ON od.order_id = o.order_id;
+FROM `tiendalatam-casestudy.tiendalatam.order_details` od
+JOIN `tiendalatam-casestudy.tiendalatam.products` p    ON od.product_id = p.product_id
+JOIN `tiendalatam-casestudy.tiendalatam.categories` ca ON p.category_id = ca.category_id
+JOIN `tiendalatam-casestudy.tiendalatam.orders` o      ON od.order_id = o.order_id;
 
 
 -- Vista 3: Segmentación RFM por cliente (lista para visualizar)
-CREATE OR REPLACE VIEW `tiendalatam-portfolio.tiendalatam.v_rfm_segments` AS
+CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_rfm_segments` AS
 WITH last_date AS (
   SELECT MAX(registration_date) AS snapshot
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
 ),
 client_rfm AS (
   SELECT
@@ -69,11 +69,11 @@ client_rfm AS (
     DATE_DIFF(ld.snapshot, MAX(o.registration_date), DAY) AS recency_days,
     COUNT(o.order_id) AS frequency,
     ROUND(SUM(o.total_amount), 2) AS monetary
-  FROM `tiendalatam-portfolio.tiendalatam.clients` c
-  JOIN `tiendalatam-portfolio.tiendalatam.orders` o
+  FROM `tiendalatam-casestudy.tiendalatam.clients` c
+  JOIN `tiendalatam-casestudy.tiendalatam.orders` o
     ON c.client_id = o.client_id AND o.order_status_id IN (3, 4)
-  JOIN `tiendalatam-portfolio.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
-  JOIN `tiendalatam-portfolio.tiendalatam.countries` co    ON c.country_id = co.country_id
+  JOIN `tiendalatam-casestudy.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
+  JOIN `tiendalatam-casestudy.tiendalatam.countries` co    ON c.country_id = co.country_id
   CROSS JOIN last_date ld
   GROUP BY c.client_id, c.name, c.last_name, ct.name, co.name, ld.snapshot
 ),
@@ -101,12 +101,12 @@ FROM scored;
 
 
 -- Vista 4: Retención por cohort mensual (matriz lista para heatmap)
-CREATE OR REPLACE VIEW `tiendalatam-portfolio.tiendalatam.v_cohort_retention` AS
+CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_cohort_retention` AS
 WITH first_orders AS (
   SELECT
     client_id,
     DATE_TRUNC(MIN(registration_date), MONTH) AS cohort_month
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
   WHERE order_status_id IN (3, 4)
   GROUP BY client_id
 ),
@@ -115,7 +115,7 @@ orders_with_cohort AS (
     o.client_id,
     fo.cohort_month,
     DATE_DIFF(DATE_TRUNC(o.registration_date, MONTH), fo.cohort_month, MONTH) AS months_since_first
-  FROM `tiendalatam-portfolio.tiendalatam.orders` o
+  FROM `tiendalatam-casestudy.tiendalatam.orders` o
   JOIN first_orders fo ON o.client_id = fo.client_id
   WHERE o.order_status_id IN (3, 4)
 ),
@@ -137,10 +137,10 @@ ORDER BY o.cohort_month, o.months_since_first;
 
 
 -- Vista 5: Métricas mensuales pre-agregadas (KPI cards y line charts)
-CREATE OR REPLACE VIEW `tiendalatam-portfolio.tiendalatam.v_monthly_metrics` AS
+CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_monthly_metrics` AS
 WITH first_orders AS (
   SELECT client_id, MIN(registration_date) AS first_order_date
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
   WHERE order_status_id IN (3, 4)
   GROUP BY client_id
 )
@@ -151,7 +151,7 @@ SELECT
   COUNTIF(DATE_TRUNC(o.registration_date, MONTH) = DATE_TRUNC(fo.first_order_date, MONTH)) AS new_clients_orders,
   ROUND(SUM(o.total_amount), 2) AS revenue,
   ROUND(AVG(o.total_amount), 2) AS aov
-FROM `tiendalatam-portfolio.tiendalatam.orders` o
+FROM `tiendalatam-casestudy.tiendalatam.orders` o
 JOIN first_orders fo ON o.client_id = fo.client_id
 WHERE o.order_status_id IN (3, 4)
 GROUP BY 1

@@ -7,7 +7,7 @@ WITH first_orders AS (
   SELECT
     client_id,
     DATE_TRUNC(MIN(registration_date), MONTH) AS cohort_month
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
   WHERE order_status_id IN (3, 4)
   GROUP BY client_id
 ),
@@ -17,7 +17,7 @@ orders_with_cohort AS (
     fo.cohort_month,
     DATE_TRUNC(o.registration_date, MONTH) AS order_month,
     DATE_DIFF(DATE_TRUNC(o.registration_date, MONTH), fo.cohort_month, MONTH) AS months_since_first
-  FROM `tiendalatam-portfolio.tiendalatam.orders` o
+  FROM `tiendalatam-casestudy.tiendalatam.orders` o
   JOIN first_orders fo ON o.client_id = fo.client_id
   WHERE o.order_status_id IN (3, 4)
 ),
@@ -41,7 +41,7 @@ ORDER BY o.cohort_month, o.months_since_first;
 -- Q7. Segmentación RFM (Recency, Frequency, Monetary)
 WITH last_date AS (
   SELECT MAX(registration_date) AS snapshot
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
 ),
 client_rfm AS (
   SELECT
@@ -52,11 +52,11 @@ client_rfm AS (
     DATE_DIFF(ld.snapshot, MAX(o.registration_date), DAY) AS recency_days,
     COUNT(o.order_id) AS frequency,
     ROUND(SUM(o.total_amount), 2) AS monetary
-  FROM `tiendalatam-portfolio.tiendalatam.clients` c
-  JOIN `tiendalatam-portfolio.tiendalatam.orders` o
+  FROM `tiendalatam-casestudy.tiendalatam.clients` c
+  JOIN `tiendalatam-casestudy.tiendalatam.orders` o
     ON c.client_id = o.client_id AND o.order_status_id IN (3, 4)
-  JOIN `tiendalatam-portfolio.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
-  JOIN `tiendalatam-portfolio.tiendalatam.countries` co    ON c.country_id = co.country_id
+  JOIN `tiendalatam-casestudy.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
+  JOIN `tiendalatam-casestudy.tiendalatam.countries` co    ON c.country_id = co.country_id
   CROSS JOIN last_date ld
   GROUP BY c.client_id, c.name, c.last_name, ct.name, co.name, ld.snapshot
 ),
@@ -95,7 +95,7 @@ ORDER BY monetary DESC;
 -- Q8. Resumen ejecutivo de segmentos RFM
 WITH last_date AS (
   SELECT MAX(registration_date) AS snapshot
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
 ),
 client_rfm AS (
   SELECT
@@ -103,8 +103,8 @@ client_rfm AS (
     DATE_DIFF(ld.snapshot, MAX(o.registration_date), DAY) AS recency_days,
     COUNT(o.order_id) AS frequency,
     SUM(o.total_amount) AS monetary
-  FROM `tiendalatam-portfolio.tiendalatam.clients` c
-  JOIN `tiendalatam-portfolio.tiendalatam.orders` o
+  FROM `tiendalatam-casestudy.tiendalatam.clients` c
+  JOIN `tiendalatam-casestudy.tiendalatam.orders` o
     ON c.client_id = o.client_id AND o.order_status_id IN (3, 4)
   CROSS JOIN last_date ld
   GROUP BY c.client_id, ld.snapshot
@@ -149,7 +149,7 @@ WITH client_revenue AS (
     client_id,
     SUM(total_amount) AS total_revenue,
     COUNT(*) AS total_orders
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
   WHERE order_status_id IN (3, 4)
   GROUP BY client_id
 )
@@ -159,8 +159,8 @@ SELECT
   ROUND(AVG(cr.total_revenue), 2) AS avg_ltv,
   ROUND(AVG(cr.total_orders), 2) AS avg_orders_per_client,
   ROUND(SUM(cr.total_revenue), 2) AS segment_revenue
-FROM `tiendalatam-portfolio.tiendalatam.clients` c
-JOIN `tiendalatam-portfolio.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
+FROM `tiendalatam-casestudy.tiendalatam.clients` c
+JOIN `tiendalatam-casestudy.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
 LEFT JOIN client_revenue cr ON c.client_id = cr.client_id
 GROUP BY ct.name
 ORDER BY avg_ltv DESC NULLS LAST;
@@ -169,14 +169,14 @@ ORDER BY avg_ltv DESC NULLS LAST;
 -- Q10. Churn rate aproximado
 WITH last_date AS (
   SELECT MAX(registration_date) AS snapshot
-  FROM `tiendalatam-portfolio.tiendalatam.orders`
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
 ),
 client_activity AS (
   SELECT
     c.client_id,
     MAX(o.registration_date) AS last_purchase
-  FROM `tiendalatam-portfolio.tiendalatam.clients` c
-  LEFT JOIN `tiendalatam-portfolio.tiendalatam.orders` o
+  FROM `tiendalatam-casestudy.tiendalatam.clients` c
+  LEFT JOIN `tiendalatam-casestudy.tiendalatam.orders` o
     ON c.client_id = o.client_id AND o.order_status_id IN (3, 4)
   GROUP BY c.client_id
 )

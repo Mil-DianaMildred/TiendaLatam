@@ -114,7 +114,7 @@ Looker Studio (antes Google Data Studio) es la herramienta de BI gratuita de Goo
 ## Overview
 
 1. Crear cuenta Google Cloud (gratis, sin tarjeta).
-2. Crear proyecto `tiendalatam-portfolio` en console.cloud.google.com.
+2. Crear proyecto `tiendalatam-casestudy` en console.cloud.google.com.
 3. Activar BigQuery sandbox.
 4. Crear dataset `tiendalatam`.
 5. Subir los 11 CSVs con autodetección de esquema.
