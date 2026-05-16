@@ -1,7 +1,5 @@
 -- =====================================================================
 -- Setup de vistas analíticas para Looker Studio
--- Ejecutar UNA VEZ después de cargar los 11 CSVs en BigQuery.
--- Reemplaza `tiendalatam-casestudy.tiendalatam` con tu propio project.dataset
 -- =====================================================================
 
 -- Vista 1: Órdenes enriquecidas (joins resueltos)

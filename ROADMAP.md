@@ -1,8 +1,4 @@
-# Roadmap — 5 días para un MVP de portafolio PM
-
-Este plan está diseñado para terminar el proyecto en una semana laboral (3-5 días intensos o ~2 horas diarias por una semana). Cada día tiene un entregable claro y un "by end of day you should have" para que sepas exactamente cuándo cerrar.
-
-Pensamiento de fondo: este proyecto no es un ejercicio de SQL, es un caso de estudio de Product Management. Cada query debe responder a una pregunta de negocio, y cada visual del dashboard debe llevar a una decisión accionable.
+# Roadmap
 
 ---
 
@@ -11,16 +7,12 @@ Pensamiento de fondo: este proyecto no es un ejercicio de SQL, es un caso de est
 **Objetivo:** montar BigQuery, cargar los datos y hacer la primera exploración.
 
 Tareas:
-- Crear cuenta de Google Cloud (gratis, sin tarjeta) y proyecto `tiendalatam-casestudy`. Seguir `docs/setup_bigquery.md` paso a paso.
-- Activar BigQuery sandbox y crear el dataset `tiendalatam`.
-- Cargar los 11 CSVs de `data_expanded/` con autodetección de esquema (~15 min).
-- Ejecutar `sql/01_setup_views.sql` para crear las 5 vistas analíticas.
-- Ejecutar `sql/03_exploratory.sql` — 6 queries que te dan el panorama: volumen, fechas, distribución de status, productos top.
+- ✅ Crear cuenta de Google Cloud (gratis, sin tarjeta) y proyecto `tiendalatam-casestudy`. Seguir `docs/setup_bigquery.md` paso a paso.
+- ✅ Activar BigQuery sandbox y crear el dataset `tiendalatam`.
+- ✅ Cargar los 11 CSVs de `data_expanded/` con autodetección de esquema (~15 min).
+- ✅ Ejecutar `sql/01_setup_views.sql` para crear las 5 vistas analíticas.
+- ✅ Ejecutar `sql/03_exploratory.sql` — 6 queries que te dan el panorama: volumen, fechas, distribución de status, productos top.
 - Documentar 3-5 observaciones iniciales en una nota.
-
-Entregable: BigQuery con datos cargados, vistas funcionando, primera lista de observaciones.
-
-Tiempo estimado: 2-3 horas.
 
 ---
 
