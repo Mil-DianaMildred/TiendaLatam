@@ -126,3 +126,11 @@ Priorizadas con criterio ICE (Impact × Confidence × Ease, escala 1-10):
 - Argentina lidera en AOV ($563) con pocas órdenes: cruzar con tipo de cliente para validar hipótesis.
 - Tecnología concentra el 74% del revenue: ¿el catálogo es demasiado estrecho? Riesgo de dependencia de una sola categoría.
 - 2026 ya casi iguala 2025 en solo 4 meses: verificar en BigQuery que las fechas de 2026 son reales y no errores de ingesta.
+
+
+NOTAS MIAS: CAMBIOS SOLICITADOS 
+- El dashboard Resumen Ejecutivo actualmente solo muestra Revenue, Órdenes, 
+AOV y Clientes activos. Necesito agregar 3 métricas de salud del negocio:
+1. Churn rate (clientes sin compra en últimos 180 días)
+2. Tasa de cancelación + devolución combinada (status_id 5 y 6)
+3. % del revenue que viene de clientes Champions (RFM)
