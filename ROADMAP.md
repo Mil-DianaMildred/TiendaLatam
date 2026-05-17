@@ -1,18 +1,22 @@
 # Roadmap
-
+falta descripcion del roadmap, aclarar que el mi framewotk y el caso de uso
 ---
+## Setup y exploración (Foundation)
 
-## Día 1 — Setup y exploración (Foundation)
-
-**Objetivo:** montar BigQuery, cargar los datos y hacer la primera exploración.
+**Objetivo:** montar BigQuery, cargar los datos, hacer la primera exploración y contextualización.
 
 Tareas:
 - ✅ Crear cuenta de Google Cloud (gratis, sin tarjeta) y proyecto `tiendalatam-casestudy`. Seguir `docs/setup_bigquery.md` paso a paso.
 - ✅ Activar BigQuery sandbox y crear el dataset `tiendalatam`.
-- ✅ Cargar los 11 CSVs de `data_expanded/` con autodetección de esquema (~15 min).
-- ✅ Ejecutar `sql/01_setup_views.sql` para crear las 5 vistas analíticas.
-- ✅ Ejecutar `sql/03_exploratory.sql` — 6 queries que te dan el panorama: volumen, fechas, distribución de status, productos top.
-- Documentar 3-5 observaciones iniciales en una nota.
+- ✅ Cargar los CSVs de `data_expanded/` con autodetección de esquema.
+- ✅ Generar con AI un plan de EDA y ejecutarlo. `sql/03_exploratory.sql` — 6 queries que dan el panorama general: volumen, fechas, distribución de status y productos top.
+- ✅ Crear con AI un `product-growth-metrics-ref` para mapear el universo ideal de métricas según el tipo de producto y evaluar el potencial de la data existente.
+- ✅ Documenta las consideraciones de negocio sobre cómo se calculan las métricas. Por ejemplo, algunas empresas calculan el revenue solo con órdenes en status `entregado`, otras incluyen también `enviado`. Asegúrate de tener claridad en cada métrica y documenta los matices relevantes para que sean tenidos en cuenta durante el procesamiento con AI. `CLAUDE`
+- ✅ Generar con AI `findings_preliminary`: analiza los hallazgos, documenta las observaciones iniciales y las preguntas que surgen `my_notes`.
+
+> **Tip:** Tómate el tiempo para este paso. Sentirse perdido aquí es normal — es mucha información para un cerebro humano, pero no para la AI. Apóyate en ella para resolver dudas, generar queries rápidos o pedir datos ya procesados. Todo va cobrando sentido a medida que pasas más tiempo con la data y construyes contexto.
+
+??? Ejecutar `sql/01_setup_views.sql` para crear las 5 vistas analíticas.
 
 ---
 
@@ -120,3 +124,6 @@ Lo que demuestra cada parte:
 - Hacer un análisis competitivo de TiendaLatam vs Mercado Libre / Falabella / Linio.
 - Construir un funnel ficticio (visitas → carrito → checkout → entregado) e identificar el cuello de botella.
 - Forecast simple de revenue con función LAG/LEAD o regresión lineal en Power BI.
+
+
+![alt text](image.png)

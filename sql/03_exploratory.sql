@@ -26,7 +26,7 @@ GROUP BY os.name
 ORDER BY orders DESC;
 
 
--- 3. Top 5 países por revenue (solo entregadas)
+-- 3. Revenue por país (solo entregadas)
 SELECT
   co.name AS country,
   COUNT(o.order_id) AS orders,
@@ -37,8 +37,7 @@ JOIN `tiendalatam-casestudy.tiendalatam.clients` c   ON o.client_id = c.client_i
 JOIN `tiendalatam-casestudy.tiendalatam.countries` co ON c.country_id = co.country_id
 WHERE o.order_status_id IN (3, 4)
 GROUP BY co.name
-ORDER BY revenue DESC
-LIMIT 5;
+ORDER BY revenue DESC;
 
 
 -- 4. Top 10 productos más vendidos
@@ -82,4 +81,40 @@ LEFT JOIN `tiendalatam-casestudy.tiendalatam.order_details` od ON p.product_id =
 WHERE od.detail_id IS NULL
 ORDER BY p.stock DESC;
 
--- 7. Clientes sin pedidos
+-- 7. Renevue por tipo de cliente (Global)
+SELECT
+  ct.name AS client_type,
+  COUNT(DISTINCT o.client_id) AS clients,
+  COUNT(o.order_id) AS orders,
+  ROUND(SUM(o.total_amount), 2) AS revenue,
+  ROUND(100 * SUM(o.total_amount) / SUM(SUM(o.total_amount)) OVER (), 2) AS pct_revenue
+FROM `tiendalatam-casestudy.tiendalatam.orders` o
+JOIN `tiendalatam-casestudy.tiendalatam.clients` c       ON o.client_id = c.client_id
+JOIN `tiendalatam-casestudy.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
+WHERE o.order_status_id IN (3, 4)
+GROUP BY ct.name
+
+-- 8. Distribucion de ventas por producto
+SELECT
+  p.product_id,
+  p.product_name,
+  ca.name                                    AS category,
+  p.price                                    AS list_price,
+  COUNT(DISTINCT od.order_id)                AS orders,
+  SUM(od.quantity)                           AS units_sold,
+  ROUND(SUM(od.quantity * od.unit_price), 2) AS revenue,
+  ROUND(100 * SUM(od.quantity * od.unit_price) 
+        / SUM(SUM(od.quantity * od.unit_price)) OVER (), 2) AS pct_revenue,
+  ROUND(SUM(SUM(od.quantity * od.unit_price)) OVER (
+        ORDER BY SUM(od.quantity * od.unit_price) DESC
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+        / SUM(SUM(od.quantity * od.unit_price)) OVER () * 100, 2) AS cumulative_pct
+FROM `tiendalatam-casestudy.tiendalatam.products` p
+JOIN `tiendalatam-casestudy.tiendalatam.categories` ca     ON p.category_id = ca.category_id
+LEFT JOIN `tiendalatam-casestudy.tiendalatam.order_details` od ON p.product_id = od.product_id
+LEFT JOIN `tiendalatam-casestudy.tiendalatam.orders` o         ON od.order_id = o.order_id
+                                                               AND o.order_status_id IN (3, 4)
+GROUP BY p.product_id, p.product_name, ca.name, p.price
+ORDER BY revenue DESC NULLS LAST;
+
+
