@@ -21,7 +21,7 @@ Tareas:
 
 ## Data Strategy - Preguntas de negocio 
 
-**Objetivo:** Definir las preguntas que el negocios debe responder en base a la mission y estrategia de la compañia. 
+**Objetivo:** Definir las preguntas que el negocios debe responder en base a la mision y estrategia de la compañia. 
 
 Tareas:
 - Consultar la mission y estrategias que la compañia tiene para alinear caulquier estructuracion de data e insights que generen valor en la direccion de que la compañia busca.
