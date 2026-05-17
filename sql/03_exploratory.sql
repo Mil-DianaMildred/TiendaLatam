@@ -8,8 +8,9 @@ SELECT
   COUNT(DISTINCT client_id)             AS unique_clients,
   MIN(registration_date)                AS first_order,
   MAX(registration_date)                AS last_order,
-  ROUND(SUM(total_amount), 2)           AS total_revenue,
-  ROUND(AVG(total_amount), 2)           AS avg_order_value
+  ROUND(SUM(total_amount), 2)                                                         AS gmv,
+  ROUND(SUM(CASE WHEN order_status_id IN (3, 4) THEN total_amount ELSE 0 END), 2)   AS revenue,
+  ROUND(AVG(total_amount), 2)                                                         AS avg_order_value
 FROM `tiendalatam-casestudy.tiendalatam.orders`;
 
 
@@ -34,7 +35,7 @@ SELECT
 FROM `tiendalatam-casestudy.tiendalatam.orders` o
 JOIN `tiendalatam-casestudy.tiendalatam.clients` c   ON o.client_id = c.client_id
 JOIN `tiendalatam-casestudy.tiendalatam.countries` co ON c.country_id = co.country_id
-WHERE o.order_status_id = 4
+WHERE o.order_status_id IN (3, 4)
 GROUP BY co.name
 ORDER BY revenue DESC
 LIMIT 5;
@@ -50,7 +51,7 @@ FROM `tiendalatam-casestudy.tiendalatam.order_details` od
 JOIN `tiendalatam-casestudy.tiendalatam.products` p    ON od.product_id = p.product_id
 JOIN `tiendalatam-casestudy.tiendalatam.categories` ca ON p.category_id = ca.category_id
 JOIN `tiendalatam-casestudy.tiendalatam.orders` o      ON od.order_id = o.order_id
-WHERE o.order_status_id = 4
+WHERE o.order_status_id IN (3, 4)
 GROUP BY p.product_name, ca.name
 ORDER BY units_sold DESC
 LIMIT 10;

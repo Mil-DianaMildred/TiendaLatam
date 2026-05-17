@@ -77,11 +77,12 @@ ORDER BY month, client_segment;
 
 
 -- Q4. Performance por país (calidad operativa)
+-- total_orders cuenta todas las órdenes (base para los % operativos); revenue solo status 3-4
 SELECT
   co.name AS country,
   COUNT(o.order_id) AS total_orders,
-  ROUND(SUM(o.total_amount), 2) AS revenue,
-  ROUND(AVG(o.total_amount), 2) AS aov,
+  ROUND(SUM(CASE WHEN o.order_status_id IN (3, 4) THEN o.total_amount ELSE 0 END), 2) AS revenue,
+  ROUND(AVG(CASE WHEN o.order_status_id IN (3, 4) THEN o.total_amount END), 2) AS aov,
   ROUND(100 * COUNTIF(o.order_status_id = 5) / COUNT(*), 2) AS pct_cancelled,
   ROUND(100 * COUNTIF(o.order_status_id = 6) / COUNT(*), 2) AS pct_returned,
   ROUND(100 * COUNTIF(o.order_status_id = 4) / COUNT(*), 2) AS pct_delivered
