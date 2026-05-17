@@ -9,10 +9,10 @@ Tareas:
 - Crear cuenta de Google Cloud (gratis, sin tarjeta) y proyecto `tiendalatam-casestudy`. Seguir `docs/setup_bigquery.md` paso a paso.
 - Activar BigQuery sandbox y crear el dataset `tiendalatam`.
 - Cargar los CSVs de `data_expanded/` con autodetección de esquema.
-- Generar con AI un plan de EDA y ejecutarlo. `sql/03_exploratory.sql` — 6 queries que dan el panorama general: volumen, fechas, distribución de status y productos top.
-- Crear con AI un `product-growth-metrics-ref` para mapear el universo ideal de métricas según el tipo de producto y evaluar el potencial de la data existente.
+- Generar con AI un plan de EDA y ejecutarlo. `sql/exploratory.sql` — 6 queries que dan el panorama general: volumen, fechas, distribución de status y productos top.
+- Crear con AI un `product_growth_metrics_ref` para mapear el universo ideal de métricas según el tipo de producto y evaluar el potencial de la data existente.
 - Documenta las consideraciones de negocio sobre cómo se calculan las métricas. Por ejemplo, algunas empresas calculan el revenue solo con órdenes en status `entregado`, otras incluyen también `enviado`. Asegúrate de tener claridad en cada métrica y documenta los matices relevantes para que sean tenidos en cuenta durante el procesamiento con AI. `CLAUDE`
-- Generar con AI `findings_preliminary`: analiza los hallazgos, documenta las observaciones iniciales y las preguntas que surgen `my_notes`.
+- Generar con AI `findings_preliminary`: analiza los hallazgos, documenta las observaciones iniciales y las preguntas que surgen `early_notes`.
 - Hacer discovery sobre los puntos que consideres mas relevantes para el objetivo al que quieres llegar, un par de sessiones con alguien que conozca en profundidad mejorara la calidad de tus insights
 
 > **Tip:** Tómate el tiempo para este paso. Sentirse perdido aquí es normal — es mucha información para un cerebro humano, pero no para la AI. Apóyate en ella para resolver dudas, generar queries rápidos o pedir datos ya procesados. Todo va cobrando sentido a medida que pasas más tiempo con la data y construyes contexto.
@@ -25,7 +25,7 @@ Tareas:
 
 Tareas:
 - Consultar la mission y estrategias que la compañia tiene para alinear caulquier estructuracion de data e insights que generen valor en la direccion de que la compañia busca.
-- Genera con AI y con `my notes` una lista de preguntas que esten alineadas al tipo de producto y a la estrategia de la compania `business_questions`.
+- Genera con AI y con `early_notes` una lista de preguntas que esten alineadas al tipo de producto y a la estrategia de la compania `business_questions`.
 - Genera con AI los queries que van a responder a las `business_questions` basados en el dataset que tienes. (`growth_metrics`, `retention_rfm`,`more_insights`, REVISAR SI MAS)
 
 ---
@@ -35,7 +35,7 @@ Tareas:
 **Objetivo:** responder las preguntas de crecimiento del negocio.
 
 Tareas:
-- Ejecutar `sql/04_growth_metrics.sql`: MoM revenue growth, ticket promedio, nuevos clientes vs recurrentes, performance por país y por canal.
+- Ejecutar `sql/growth_metrics.sql`: MoM revenue growth, ticket promedio, nuevos clientes vs recurrentes, performance por país y por canal.
 - Calcular la North Star Metric candidata. Mi recomendación para retail digital: "ingresos generados por clientes recurrentes en los últimos 90 días". Justifica por qué la elegiste.
 - Identificar los 3 países con mejor performance y los 3 con peor, y formular hipótesis del porqué.
 
@@ -52,7 +52,7 @@ Tip PM: no te quedes en "Argentina vendió X". Avanza a "Argentina creció X% pe
 **Objetivo:** este es el corazón del proyecto y lo que más impresiona en una entrevista de PM.
 
 Tareas:
-- Ejecutar `sql/05_retention_rfm.sql`: análisis de cohortes mensuales (porcentaje de clientes que vuelven a comprar en mes 1, 3, 6, 12), segmentación RFM (Recency, Frequency, Monetary) y churn rate por segmento.
+- Ejecutar `sql/retention_rfm.sql`: análisis de cohortes mensuales (porcentaje de clientes que vuelven a comprar en mes 1, 3, 6, 12), segmentación RFM (Recency, Frequency, Monetary) y churn rate por segmento.
 - Construir el perfil de los 8 segmentos RFM: Champions, Loyal, At Risk, New/Promising, About to Sleep, Needs Attention, Hibernating, Lost. Calcular cuántos hay, cuánto facturan y qué porcentaje del revenue total representan. (Referencia: Champions son 132 clientes que concentran el 56.4% del revenue.)
 - Calcular LTV promedio por tipo de cliente (Minorista, Mayorista, Corporativo, VIP).
 
@@ -136,7 +136,7 @@ Lo que demuestra cada parte:
 - Forecast simple de revenue con función LAG/LEAD o regresión lineal en Power BI.
 
 
-??? Ejecutar `sql/01_setup_views.sql` para crear las 5 vistas analíticas.
+??? Ejecutar `sql/setup_views.sql` para crear las 5 vistas analíticas.
 
 ![alt text](image.png)
 

@@ -4,7 +4,7 @@ intro pending
 
 ---
 
-## Bloque 1 — Exploración (`sql/03_exploratory.sql`)
+## Bloque 1 — Exploración (`sql/exploratory.sql`)
 
 **E1. ¿Qué volumen maneja el negocio y en qué ventana de tiempo?**
 
@@ -121,7 +121,7 @@ Resultado: **no hay productos sin ventas** en el catálogo actual. Todos los 50 
 
 ---
 
-## Bloque 2 — Revenue y Growth (`sql/04_growth_metrics.sql`)
+## Bloque 2 — Revenue y Growth (`sql/growth_metrics.sql`)
 
 **Q1. ¿Cómo ha evolucionado el revenue mes a mes? ¿Estamos creciendo?**
 
@@ -194,7 +194,7 @@ Dato clave a evaluar: Tecnología concentra el 74% del revenue con ~16% de las u
 
 ---
 
-## Bloque 3 — Retención (`sql/05_retention_rfm.sql`)
+## Bloque 3 — Retención (`sql/retention_rfm.sql`)
 
 **Q6. ¿Cuál es la curva de retención por cohorte mensual?**
 
@@ -271,7 +271,7 @@ Preguntas adicionales de negocio:
 
 ---
 
-## Bloque 4 — Producto y Operación (`sql/06_pm_insights.sql`)
+## Bloque 4 — Producto y Operación (`sql/more_insights.sql`)
 
 **Q11. ¿Cuál es la curva ABC del catálogo? (Pareto)**
 

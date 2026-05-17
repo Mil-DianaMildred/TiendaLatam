@@ -118,7 +118,7 @@ Looker Studio (antes Google Data Studio) es la herramienta de BI gratuita de Goo
 3. Activar BigQuery sandbox.
 4. Crear dataset `tiendalatam`.
 5. Subir los 11 CSVs con autodetección de esquema.
-6. Ejecutar las queries de `sql/01_setup_views.sql` para crear las vistas analíticas.
+6. Ejecutar las queries de `sql/setup_views.sql` para crear las vistas analíticas.
 7. Conectar Looker Studio a las vistas creadas.
 8. Construir el dashboard siguiendo `docs/dashboard_design.md`.
 9. Publicar el dashboard como link público.

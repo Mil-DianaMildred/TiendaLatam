@@ -28,12 +28,12 @@ proyecto-tiendalatam/
 ├── ARCHITECTURE.md                 # Cómo está montado el proyecto técnicamente
 ├── data_expanded/                  # CSVs del dataset (11 tablas, ~17k filas)
 ├── sql/
-│   ├── 01_setup_views.sql          # Vistas analíticas para Looker Studio
-│   ├── 01_schema.sql               # DDL Postgres (referencia, no usado)
-│   ├── 03_exploratory.sql          # Exploración inicial
-│   ├── 04_growth_metrics.sql       # KPIs de crecimiento
-│   ├── 05_retention_rfm.sql        # Cohortes y segmentación RFM
-│   └── 06_pm_insights.sql          # Preguntas de Product Management
+│   ├── setup_views.sql             # Vistas analíticas para Looker Studio
+│   ├── schema.sql                  # DDL Postgres (referencia, no usado)
+│   ├── exploratory.sql             # Exploración inicial
+│   ├── growth_metrics.sql          # KPIs de crecimiento
+│   ├── retention_rfm.sql           # Cohortes y segmentación RFM
+│   └── more_insights.sql           # Preguntas de Product Management
 └── docs/
     ├── setup_bigquery.md           # Guía paso a paso de setup
     ├── data_model.md               # Diccionario de datos
@@ -72,8 +72,8 @@ Detalles en `docs/findings_preliminary.md`.
 
 1. Crear una cuenta Google Cloud (gratis, sin tarjeta).
 2. Seguir `docs/setup_bigquery.md` para crear el proyecto `tiendalatam-casestudy` y cargar los CSVs de `data_expanded/`.
-3. Ejecutar `sql/01_setup_views.sql` para crear las vistas analíticas.
-4. Ejecutar las consultas exploratorias y de análisis (`sql/03` a `sql/06`).
+3. Ejecutar `sql/setup_views.sql` para crear las vistas analíticas.
+4. Ejecutar las consultas exploratorias y de análisis (`sql/exploratory.sql`, `sql/growth_metrics.sql`, `sql/retention_rfm.sql`, `sql/more_insights.sql`).
 5. Conectar Looker Studio a las vistas y construir el dashboard siguiendo `docs/dashboard_design.md`.
 
 ## Sobre la autora

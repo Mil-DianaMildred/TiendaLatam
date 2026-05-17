@@ -2,7 +2,7 @@
 
 Guía paso a paso para construir un dashboard ejecutivo en Looker Studio (gratis, basado en navegador) que comunique los hallazgos de Growth & Retención. Pensado para que cada página responda una pregunta clara y lleve a una decisión.
 
-Antes de empezar, asegúrate de haber completado el setup de BigQuery (ver `docs/setup_bigquery.md`) y haber ejecutado `sql/01_setup_views.sql` para crear las vistas analíticas.
+Antes de empezar, asegúrate de haber completado el setup de BigQuery (ver `docs/setup_bigquery.md`) y haber ejecutado `sql/setup_views.sql` para crear las vistas analíticas.
 
 ## 1. Fuentes de datos a conectar
 

@@ -84,7 +84,7 @@ Numeros que deberías ver:
 
 ## Paso 6 — Ejecutar la primera query
 
-Copia el contenido de `sql/03_exploratory_bq.sql`, pégalo en la consola de BigQuery y ejecuta cada query con cmd+enter / ctrl+enter. Los resultados aparecen en la parte inferior.
+Copia el contenido de `sql/exploratory.sql`, pégalo en la consola de BigQuery y ejecuta cada query con cmd+enter / ctrl+enter. Los resultados aparecen en la parte inferior.
 
 Tip de productividad: BigQuery te dice cuántos GB va a procesar antes de ejecutar. Para este dataset todo es <100 KB, ni te acerca al límite gratis del mes.
 

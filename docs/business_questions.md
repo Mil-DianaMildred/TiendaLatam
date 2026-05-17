@@ -1,6 +1,6 @@
 # Las preguntas que se buscan responder
 
-Cada pregunta está anclada a una de las 4 apuestas estratégicas de TiendaLatam `company_mission_and_strategy`.
+Cada pregunta está anclada a una de las 4 apuestas estratégicas de TiendaLatam `business_mission_and_strategy`.
 
 **Misión:** *"Que cualquier latinoamericano pueda comprar productos de calidad al mejor precio del mercado, sin depender de lo que ofrece el comercio local."*
 
@@ -8,7 +8,7 @@ Cada pregunta está anclada a una de las 4 apuestas estratégicas de TiendaLatam
 
 ---
 
-## Bloque 0 — Contexto del negocio (sql/03_exploratory.sql)
+## Bloque 0 — Contexto del negocio (sql/exploratory.sql)
 
 > Antes de responder cualquier pregunta estratégica, necesitas entender qué tan grande es el negocio, qué tan sana es la operación y qué datos tienes disponibles. Este bloque es la base factual de todo lo que sigue.
 
@@ -43,22 +43,22 @@ Foco: perfil del cliente más frecuente — tipo de cliente (Minorista, Mayorist
 
 ---
 
-## Apuesta 1 — El motor central: precio competitivo (sql/03_exploratory.sql + sql/06_pm_insights.sql)
+## Apuesta 1 — El motor central: precio competitivo (sql/exploratory.sql + sql/more_insights.sql)
 
 > **La pregunta estratégica detrás:** ¿Tenemos realmente liderazgo de precio en las categorías que más pesan, y cómo lo extendemos a las que queremos crecer?
 
 **A1-Q1. ¿Cuál es la curva ABC del catálogo?**
-SQL: `sql/06_pm_insights.sql` Q11
+SQL: `sql/more_insights.sql` Q11
 Foco: qué % de productos (categoría A) generan el 80% del revenue. ¿Cuántos SKUs son prescindibles?
 *Decisión que habilita:* curación del catálogo digital. En Tecnología se defiende el liderazgo; en el resto se evalúa si el precio es competitivo antes de invertir en marketing.
 
 **A1-Q2. ¿Cuáles son los productos en riesgo de quiebre de stock?**
-SQL: `sql/06_pm_insights.sql` Q13
+SQL: `sql/more_insights.sql` Q13
 Foco: productos con alta rotación y stock bajo. Días de inventario disponible.
 *Decisión que habilita:* si un producto líder tiene quiebre de stock, la promesa de precio se rompe — el cliente va al comercio local. Esto es una alerta operativa directa a la misión.
 
 **A1-Q3. ¿Qué productos se compran juntos?**
-SQL: `sql/06_pm_insights.sql` Q14
+SQL: `sql/more_insights.sql` Q14
 Foco: pares de productos con mayor co-purchase rate. Base para bundles y cross-sell.
 *Decisión que habilita:* aumentar el AOV sin cambiar el catálogo. Un bundle bien diseñado refuerza la percepción de valor-precio.
 
@@ -69,32 +69,32 @@ Foco: comparar el precio de lista de los productos top (Laptop, Smartphone, Aspi
 
 ---
 
-## Apuesta 2 — Retención digital (sql/05_retention_rfm.sql)
+## Apuesta 2 — Retención digital (sql/retention_rfm.sql)
 
 > **La pregunta estratégica detrás:** Sin tiendas físicas, toda la retención ocurre en canales digitales. ¿Estamos tapando la fuga o dejando escapar revenue que ya adquirimos?
 
 **A2-Q4. ¿Cuál es la curva de retención por cohorte mensual?**
-SQL: `sql/05_retention_rfm.sql` Q6
+SQL: `sql/retention_rfm.sql` Q6
 Foco: % de clientes de cada cohorte que vuelven a comprar en el mes 1, 3, 6 y 12.
 *Decisión que habilita:* si la retención mejora en cohortes recientes, hay señal de PMF. Si degrada, el problema de churn es estructural y precede a cualquier inversión en adquisición.
 
 **A2-Q5. ¿Cómo se segmentan los 636 clientes compradores con RFM?**
-SQL: `sql/05_retention_rfm.sql` Q7
+SQL: `sql/retention_rfm.sql` Q7
 Foco: etiquetar a cada cliente en Champions, Loyal, At Risk, New/Promising, About to Sleep, Needs Attention, Hibernating, Lost.
 *Decisión que habilita:* sin segmentación RFM, cualquier campaña de retención es spray-and-pray. Con ella, cada segmento recibe un tratamiento distinto y medible.
 
 **A2-Q6. ¿Qué % del revenue viene de cada segmento RFM?**
-SQL: `sql/05_retention_rfm.sql` Q8
+SQL: `sql/retention_rfm.sql` Q8
 Foco: concentración de valor. Champions + Loyal vs el resto.
 *Decisión que habilita:* priorizar dónde actuar. Los Champions (132 clientes, 56.4% del revenue) son el activo más frágil del negocio — perder 10 de ellos duele más que perder 100 clientes nuevos.
 
 **A2-Q7. ¿Cuál es la tasa de churn actual y cómo varía por segmento?**
-SQL: `sql/05_retention_rfm.sql` Q10
+SQL: `sql/retention_rfm.sql` Q10
 Foco: % de clientes sin compra en los últimos 180 días, desglosado por tipo de cliente y segmento RFM.
 *Decisión que habilita:* cuantificar el revenue en riesgo. At Risk + Hibernating + Lost representan revenue histórico que puede reactivarse con bajo costo relativo.
 
 **A2-Q8. ¿Cuántos días tarda un cliente en hacer su 2da compra?**
-SQL: `sql/06_pm_insights.sql` Q15
+SQL: `sql/more_insights.sql` Q15
 Foco: mediana y distribución del time-to-second-purchase. ¿Cuál es el momento óptimo para una campaña de reengagement?
 *Decisión que habilita:* diseñar el flujo de activación digital post-primera compra. La mediana de 74 días define cuándo activar el primer touchpoint automático — antes de que el cliente enfríe.
 
@@ -104,7 +104,7 @@ Foco: volumen de órdenes en estados intermedios (296 Pendiente + 350 Procesando
 *Nota — gap de datos:* el dataset no tiene timestamps de cambio de estado, así que no podemos medir cuánto tiempo lleva una orden en "Pendiente". Lo que sí podemos hacer es cruzar clientes con órdenes en estos estados contra su historial de recompra.
 
 **A2-Q9. ¿Cuál es el LTV promedio por tipo de cliente?**
-SQL: `sql/05_retention_rfm.sql` Q9
+SQL: `sql/retention_rfm.sql` Q9
 Foco: LTV acumulado de Minorista vs Mayorista vs Corporativo vs VIP.
 *Decisión que habilita:* validar si el mix de adquisición está alineado con la misión. Si el LTV de Minoristas es bajo en comparación con Corporativos, hay una tensión con el posicionamiento hacia el consumidor individual.
 
@@ -113,18 +113,18 @@ Foco: comparar LTV, frecuencia de compra, AOV y churn rate de VIP/Corporativo (1
 *Decisión que habilita:* la misión apunta al "cualquier latinoamericano" — consumidor individual, no empresa. Si el LTV de Corporativos es muy superior pero hay pocos, hay una tensión estratégica: ¿estamos sirviendo a quien dijimos que serviríamos? Esta pregunta no tiene una respuesta correcta, pero un PM debe poder articularla con datos.
 
 **A2-Q10. ¿Qué % del revenue viene de clientes nuevos vs recurrentes?**
-SQL: `sql/04_growth_metrics.sql` Q3
+SQL: `sql/growth_metrics.sql` Q3
 Foco: evolución mensual de la proporción nuevos/recurrentes. ¿El negocio está madurando o todavía depende de adquisición?
 *Decisión que habilita:* un negocio sano en la etapa de TiendaLatam debería ver la curva de recurrentes crecer en términos absolutos. Si no, hay un problema de retención que ningún gasto en adquisición puede resolver.
 
 ---
 
-## Apuesta 3 — Expansión geográfica (sql/04_growth_metrics.sql)
+## Apuesta 3 — Expansión geográfica (sql/growth_metrics.sql)
 
 > **La pregunta estratégica detrás:** Colombia, Brasil y México son grandes y están underperforming. ¿El problema es de demanda, de precio o de operación?
 
 **A3-Q11. ¿Cómo ha evolucionado el revenue mes a mes por país? ¿Estamos creciendo?**
-SQL: `sql/04_growth_metrics.sql` Q1
+SQL: `sql/growth_metrics.sql` Q1
 Foco: MoM growth % global y por mercado. Identifica meses con caída fuerte y picos estacionales.
 *Decisión que habilita:* distinguir mercados en aceleración (candidatos a más inversión) de mercados estancados (requieren diagnóstico antes de escalar).
 
@@ -134,7 +134,7 @@ Foco: fecha de primera orden por país. Si Colombia lanzó 12 meses después que
 *SQL sugerido:* `SELECT country, MIN(o.registration_date) AS first_order FROM orders o JOIN clients c ON o.client_id = c.client_id JOIN countries co ON c.country_id = co.country_id GROUP BY country ORDER BY first_order`
 
 **A3-Q12. ¿Qué país tiene la mejor y peor performance, y cuál es el diagnóstico?**
-SQL: `sql/04_growth_metrics.sql` Q4
+SQL: `sql/growth_metrics.sql` Q4
 Foco: cruzar revenue con AOV, % cancelación y % devolución por país. Un país puede vender mucho con mala calidad operativa.
 *Decisión que habilita:* priorizar la Apuesta 3. Si Colombia, Brasil o México tienen alta cancelación, el problema no es awareness — es que la operación no está lista para escalar ahí.
 
@@ -148,23 +148,23 @@ Foco: si los precios están fijados en USD, países con alta inflación o devalu
 *Nota — gap de datos:* requiere cruzar con datos externos de tipo de cambio (banco central o APIs como Open Exchange Rates).
 
 **A3-Q13. ¿El AOV difiere entre mercados y cómo evoluciona?**
-SQL: `sql/04_growth_metrics.sql` Q2
+SQL: `sql/growth_metrics.sql` Q2
 Foco: AOV por país y por tipo de cliente. Hipótesis: AOV bajo en mercados grandes indica tickets pequeños o mix de categorías diferente.
 *Decisión que habilita:* afinar el argumento de precio. Si en Colombia el AOV es bajo ($428 vs $563 en Argentina), ¿es porque el cliente compra menos o porque no encuentra los productos premium que busca?
 
 ---
 
-## Apuesta 4 — Diversificación de catálogo (sql/04_growth_metrics.sql + sql/06_pm_insights.sql)
+## Apuesta 4 — Diversificación de catálogo (sql/growth_metrics.sql + sql/more_insights.sql)
 
 > **La pregunta estratégica detrás:** Tecnología genera el 74% del revenue con un solo SKU que vale el 33%. ¿Cómo crecemos Hogar, Moda y Deportes sin perder el liderazgo de precio que es el motor?
 
 **A4-Q14. ¿Qué categorías de producto crecen y cuáles se estancan?**
-SQL: `sql/04_growth_metrics.sql` Q5
+SQL: `sql/growth_metrics.sql` Q5
 Foco: MoM de revenue y unidades por categoría. Identifica categorías con volumen de unidades pero revenue bajo — señal de que hay demanda pero falta ticket.
 *Decisión que habilita:* decidir en qué categorías invertir en precio y marketing. Hogar y Moda ya tienen volumen de unidades — el gap es de precio percibido, no de demanda.
 
 **A4-Q15. ¿Cómo es el performance del equipo de ventas por tienda?**
-SQL: `sql/06_pm_insights.sql` Q12
+SQL: `sql/more_insights.sql` Q12
 Foco: revenue por empleado, órdenes gestionadas, AOV por vendedor.
 *Decisión que habilita:* aunque TiendaLatam es un modelo digital, las 10 tiendas físicas existen. Entender qué vendedores tienen mejor performance por categoría puede informar qué categorías tienen mayor potencial de crecimiento en cada mercado.
 

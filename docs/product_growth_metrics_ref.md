@@ -56,14 +56,14 @@ La columna **Disponibilidad** indica si la métrica se puede construir con el da
 | Métrica | Definición | Disponibilidad |
 |---------|-----------|----------------|
 | Revenue mensual (MRR) | Revenue total de órdenes válidas (Enviado + Entregado) en el mes. | ✅ Disponible |
-| MoM growth % | Tasa de crecimiento del revenue mes a mes: `(mes actual / mes anterior) − 1`. | ✅ Disponible — `sql/04_growth_metrics.sql` Q1 |
+| MoM growth % | Tasa de crecimiento del revenue mes a mes: `(mes actual / mes anterior) − 1`. | ✅ Disponible — `sql/growth_metrics.sql` Q1 |
 | YoY growth % | Crecimiento del revenue comparando el mismo período del año anterior. | ✅ Disponible — derivable |
 | AOV — Average Order Value | Revenue total dividido entre número de órdenes válidas en el período. | ✅ Disponible — global $483.84 |
 | LTV — Lifetime Value | Revenue total acumulado por cliente durante toda su relación con la tienda. | ✅ Disponible — calculable por cliente |
 | Revenue por segmento RFM | Distribución del revenue entre Champions, Loyal, At Risk, etc. | ✅ Disponible — Champions generan 56.4% |
-| Revenue nuevos vs recurrentes | % del revenue mensual proveniente de primeras compras vs clientes que repiten. | ✅ Disponible — `sql/04_growth_metrics.sql` Q3 |
+| Revenue nuevos vs recurrentes | % del revenue mensual proveniente de primeras compras vs clientes que repiten. | ✅ Disponible — `sql/growth_metrics.sql` Q3 |
 | Tasa de cancelación de revenue | % del revenue bruto perdido por órdenes canceladas o devueltas. | ✅ Disponible — derivable de `order_statuses` |
-| Revenue por empleado / tienda | Revenue atribuido a cada vendedor o tienda física. | ✅ Disponible — `sql/06_pm_insights.sql` Q12 |
+| Revenue por empleado / tienda | Revenue atribuido a cada vendedor o tienda física. | ✅ Disponible — `sql/more_insights.sql` Q12 |
 | LTV:CAC ratio | Cuántas veces el LTV supera el CAC. Meta saludable: >3x. | ❌ Sin datos de CAC |
 | Gross margin | Revenue menos costo de productos vendidos (COGS), expresado en %. | ❌ Sin datos de costos |
 
@@ -73,10 +73,10 @@ La columna **Disponibilidad** indica si la métrica se puede construir con el da
 
 | Métrica | Definición | Disponibilidad |
 |---------|-----------|----------------|
-| Análisis ABC de catálogo (Pareto) | Clasificación de productos en A (80% del revenue), B (siguiente 15%) y C (resto). | ✅ Disponible — `sql/06_pm_insights.sql` Q11 |
-| Market basket / co-purchase rate | Con qué frecuencia dos productos se compran juntos. Base para bundles y cross-sell. | ✅ Disponible — `sql/06_pm_insights.sql` Q14 |
-| Dead stock / productos sin ventas | Productos con stock > 0 y cero unidades vendidas. Candidatos a descatalogación. | ✅ Disponible — `sql/03_exploratory.sql` E6 |
-| Días de inventario disponible | Stock actual dividido entre la tasa de venta diaria de los últimos 90 días. | ✅ Disponible — `sql/06_pm_insights.sql` Q13 |
+| Análisis ABC de catálogo (Pareto) | Clasificación de productos en A (80% del revenue), B (siguiente 15%) y C (resto). | ✅ Disponible — `sql/more_insights.sql` Q11 |
+| Market basket / co-purchase rate | Con qué frecuencia dos productos se compran juntos. Base para bundles y cross-sell. | ✅ Disponible — `sql/more_insights.sql` Q14 |
+| Dead stock / productos sin ventas | Productos con stock > 0 y cero unidades vendidas. Candidatos a descatalogación. | ✅ Disponible — `sql/exploratory.sql` E6 |
+| Días de inventario disponible | Stock actual dividido entre la tasa de venta diaria de los últimos 90 días. | ✅ Disponible — `sql/more_insights.sql` Q13 |
 | Revenue por categoría (% del total) | Distribución del revenue entre las 8 categorías de producto. | ✅ Disponible — Tecnología: 74% |
 | Precio promedio de venta (ASP) | Precio unitario promedio real de venta (puede diferir del precio catálogo). | ✅ Disponible — campo `unit_price` en `order_details` |
 | Tasa de productos activos vs descatalogados | % de SKUs con status activo sobre el total del catálogo. | ✅ Disponible — campo `status` en `products` |
@@ -90,8 +90,8 @@ La columna **Disponibilidad** indica si la métrica se puede construir con el da
 |---------|-----------|----------------|
 | Tasa de entrega exitosa | % de órdenes que alcanzan status "Entregado" sobre el total. | ✅ Disponible — 63.5% global |
 | Tasa de cancelación | % de órdenes canceladas sobre el total. Alerta si supera el 5%. | ✅ Disponible — 5.1% global |
-| Performance por tienda / país | Revenue, AOV y % cancelación desglosados por tienda o país. | ✅ Disponible — `sql/04_growth_metrics.sql` Q4 |
-| Órdenes por empleado | Número de órdenes gestionadas por cada vendedor. Indicador de productividad. | ✅ Disponible — `sql/06_pm_insights.sql` Q12 |
+| Performance por tienda / país | Revenue, AOV y % cancelación desglosados por tienda o país. | ✅ Disponible — `sql/growth_metrics.sql` Q4 |
+| Órdenes por empleado | Número de órdenes gestionadas por cada vendedor. Indicador de productividad. | ✅ Disponible — `sql/more_insights.sql` Q12 |
 | Order fulfillment time | Días entre la creación de la orden y el cambio a status "Entregado". | ❌ Sin timestamp por cambio de estado |
 | Tasa de órdenes en estado pendiente prolongado | % de órdenes con más de X días en "Pendiente" o "Procesando". Señal de cuello de botella. | 🟡 Parcial — sin timestamp de cambio de estado |
 
