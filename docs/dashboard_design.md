@@ -28,15 +28,16 @@ En Looker Studio → **Crear → Fuente de datos → BigQuery → tiendalatam-ca
 
 Aplicar desde Tema y diseño → Personalizar. Define la paleta en la primera página y guarda como tema predeterminado.
 
-| Elemento | Hex | Uso |
-|---|---|---|
-| Fondo | `#F5F1EA` | Fondo de todas las páginas |
-| Acento principal | `#1F3A5F` | Headers, scorecards positivos |
-| Acento secundario | `#F2A65A` | Elementos de alerta media |
-| Éxito / positivo | `#4CAF7A` | Flechas de crecimiento, "Stock OK" |
-| Alerta / negativo | `#D9534F` | Flechas de caída, "Riesgo de quiebre" |
-| Texto principal | `#2D2D2D` | Títulos y etiquetas |
-
+|Elemento                |Hex      |Uso                                                              |
+|------------------------|---------|-----------------------------------------------------------------|
+|Fondo                   |`#F6F8FE`|Fondo cálido y neutro para todas las páginas (se mantiene)       |
+|Acento principal        |`#052DA6`|Headers, scorecards positivos, botones primarios                 |
+|Acento secundario       |`#74ACDF`|Tarjetas secundarias, bordes, tabs activos/hover                 |
+|Éxito / positivo        |`#4CAF7A`|Flechas de crecimiento, “Stock OK” (se mantiene para legibilidad)|
+|Alerta / negativo       |`#D50E35`|Flechas de caída, “Riesgo de quiebre”, badges de error           |
+|Alerta media / warning  |`#FDD315`|Alertas de riesgo moderado, “Revisar pronto”                     |
+|Texto principal         |`#2D2D2D`|Títulos y etiquetas (se mantiene para contraste)                 |
+|Texto sobre fondo oscuro|`#FFFFFF`|Texto en headers y componentes con `#052DA6`                     |
 ---
 
 ## 3. Campos calculados en Looker Studio
