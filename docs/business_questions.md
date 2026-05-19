@@ -437,14 +437,12 @@ SQL: `sql/retention_rfm.sql` Q9
 Foco: LTV acumulado de Minorista vs Mayorista vs Corporativo vs VIP.
 *Decisión que habilita:* validar si el mix de adquisición está alineado con la misión. Si el LTV de Minoristas es bajo en comparación con Corporativos, hay una tensión con el posicionamiento hacia el consumidor individual.
 
-```markdown
 | client_type | clients | avg_ltv | avg_orders_per_client | segment_revenue |
 |-------------|--------:|--------:|----------------------:|----------------:|
 | Corporativo | 80 | $2,425.62 | 4.78 | $179,496.10 |
 | Minorista | 432 | $2,387.61 | 4.87 | $935,941.30 |
 | VIP | 60 | $2,347.58 | 4.92 | $122,074.10 |
 | Mayorista | 128 | $1,999.88 | 4.47 | $235,985.70 |
-```
 
 Lo que llama la atención inmediatamente: El spread entre el LTV más alto (Corporativo $2,425) y el más bajo (Mayorista $1,999) es de apenas 17%. Para un negocio con 4 tipos de cliente tan distintos, eso es casi plano — y eso es una señal de alerta, no de salud.
 
@@ -508,12 +506,61 @@ Foco: MoM growth % global y por mercado. Identifica meses con caída fuerte y pi
 **A3-Q11b. ¿Todos los mercados se lanzaron al mismo tiempo, o hay diferencias de madurez que distorsionan la comparación?**
 Foco: fecha de primera orden por país. Si Colombia lanzó 12 meses después que Ecuador, comparar su revenue absoluto es injusto y lleva a decisiones equivocadas.
 *Decisión que habilita:* construir una comparación justa entre mercados — la base para priorizar en la Apuesta 3. Un mercado "underperforming" puede ser simplemente más joven.
-*SQL sugerido:* `SELECT country, MIN(o.registration_date) AS first_order FROM orders o JOIN clients c ON o.client_id = c.client_id JOIN countries co ON c.country_id = co.country_id GROUP BY country ORDER BY first_order`
+
+| country | first_order_date | months_active | total_buyers | total_orders | total_revenue |
+|---------|-----------------|-------------:|-------------:|-------------:|--------------:|
+| Ecuador | 2021-07-01 | 58 | 68 | 387 | $195,579.45 |
+| Costa Rica | 2021-11-06 | 54 | 46 | 228 | $115,579.35 |
+| Perú | 2022-03-04 | 50 | 74 | 353 | $183,409.85 |
+| Bolivia | 2022-03-07 | 50 | 70 | 344 | $173,121.75 |
+| Colombia | 2022-07-12 | 46 | 51 | 224 | $95,860.90 |
+| México | 2022-07-21 | 46 | 78 | 292 | $136,553.60 |
+| Uruguay | 2022-08-02 | 45 | 60 | 246 | $118,538.30 |
+| Chile | 2022-08-26 | 45 | 65 | 389 | $171,887.75 |
+| Brasil | 2022-10-12 | 43 | 63 | 328 | $139,890.15 |
+| Argentina | 2022-11-13 | 42 | 61 | 254 | $143,076.10 |
+
+agregarlo a la los archivos de SQL 
+SELECT
+  co.name                          AS country,
+  MIN(o.registration_date)         AS first_order_date,
+  DATE_DIFF(
+    CURRENT_DATE(),
+    MIN(o.registration_date),
+    MONTH
+  )                                AS months_active,
+  COUNT(DISTINCT o.client_id)      AS total_buyers,
+  COUNT(o.order_id)                AS total_orders,
+  ROUND(SUM(o.total_amount), 2)    AS total_revenue
+
+FROM `tiendalatam-casestudy.tiendalatam.orders` o
+JOIN `tiendalatam-casestudy.tiendalatam.clients` c
+  ON o.client_id = c.client_id
+JOIN `tiendalatam-casestudy.tiendalatam.countries` co
+  ON c.country_id = co.country_id
+
+WHERE o.order_status_id IN (3, 4)   -- solo Enviado / Entregado
+
+GROUP BY co.name
+ORDER BY first_order_date ASC;
 
 **A3-Q12. ¿Qué país tiene la mejor y peor performance, y cuál es el diagnóstico?**
 SQL: `sql/growth_metrics.sql` Q4
 Foco: cruzar revenue con AOV, % cancelación y % devolución por país. Un país puede vender mucho con mala calidad operativa.
 *Decisión que habilita:* priorizar la Apuesta 3. Si Colombia, Brasil o México tienen alta cancelación, el problema no es awareness — es que la operación no está lista para escalar ahí.
+
+| country | total_orders | revenue | aov | pct_cancelled | pct_returned | pct_delivered |
+|---------|-------------:|--------:|----:|--------------:|-------------:|--------------:|
+| Ecuador | 506 | $195,579.45 | $505.37 | 3.75% | 3.36% | 66.60% |
+| Perú | 462 | $183,409.85 | $519.57 | 4.76% | 2.60% | 63.20% |
+| Bolivia | 445 | $173,121.75 | $503.26 | 4.72% | 1.57% | 61.80% |
+| Chile | 505 | $171,887.75 | $441.87 | 4.95% | 2.77% | 64.55% |
+| Argentina | 334 | $143,076.10 | $563.29 | 5.39% | 2.10% | 62.87% |
+| Brasil | 427 | $139,890.15 | $426.49 | 5.15% | 2.58% | 64.17% |
+| México | 384 | $136,553.60 | $467.65 | 5.47% | 2.86% | 63.80% |
+| Uruguay | 332 | $118,538.30 | $481.86 | 5.72% | 3.01% | 61.45% |
+| Costa Rica | 306 | $115,579.35 | $506.93 | 5.23% | 2.94% | 61.76% |
+| Colombia | 299 | $95,860.90 | $427.95 | 6.69% | 2.68% | 63.55% |
 
 **A3-Q12b. ¿Los patrones de cancelación y devolución varían por país Y por categoría?**
 Foco: matriz país × categoría para tasa de cancelación y devolución. ¿Hay categorías específicas que generan más problemas en ciertos mercados?
@@ -528,6 +575,8 @@ Foco: si los precios están fijados en USD, países con alta inflación o devalu
 SQL: `sql/growth_metrics.sql` Q2
 Foco: AOV por país y por tipo de cliente. Hipótesis: AOV bajo en mercados grandes indica tickets pequeños o mix de categorías diferente.
 *Decisión que habilita:* afinar el argumento de precio. Si en Colombia el AOV es bajo ($428 vs $563 en Argentina), ¿es porque el cliente compra menos o porque no encuentra los productos premium que busca?
+
+
 
 ---
 
