@@ -1,8 +1,68 @@
 -- =====================================================================
 -- Retención, Cohortes y RFM - BigQuery dialect
 -- =====================================================================
+-- Q6. Cohort analysis - retención mensual (Para humanos - trimestral)
+WITH first_purchase AS (
+  SELECT
+    client_id,
+    DATE_TRUNC(MIN(registration_date), MONTH) AS cohort_month
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
+  WHERE order_status_id IN (3, 4)
+  GROUP BY client_id
+),
 
--- Q6. Cohort analysis - retención mensual
+monthly_activity AS (
+  SELECT DISTINCT
+    client_id,
+    DATE_TRUNC(registration_date, MONTH) AS activity_month
+  FROM `tiendalatam-casestudy.tiendalatam.orders`
+  WHERE order_status_id IN (3, 4)
+),
+
+cohort_activity AS (
+  SELECT
+    f.cohort_month,
+    f.client_id,
+    DATE_DIFF(m.activity_month, f.cohort_month, MONTH) AS months_since_first
+  FROM first_purchase f
+  JOIN monthly_activity m USING (client_id)
+  WHERE DATE_DIFF(m.activity_month, f.cohort_month, MONTH) BETWEEN 0 AND 12
+),
+
+cohort_sizes AS (
+  SELECT
+    cohort_month,
+    COUNT(DISTINCT client_id) AS num_clients
+  FROM cohort_activity
+  WHERE months_since_first = 0
+  GROUP BY cohort_month
+)
+
+SELECT
+  FORMAT_DATE('%Y-%m', ca.cohort_month) AS cohort_month,
+  cs.num_clients,
+
+  -- Q0: mes de entrada (absoluto, siempre = num_clients)
+  COUNT(DISTINCT CASE WHEN months_since_first = 0 THEN ca.client_id END) AS q0,
+
+  -- Q1: meses 1, 2, 3 — ¿volvió en alguno de esos 3 meses?
+  ROUND(COUNT(DISTINCT CASE WHEN months_since_first BETWEEN 1 AND 3  THEN ca.client_id END) * 100.0 / cs.num_clients, 1) AS q1,
+
+  -- Q2: meses 4, 5, 6
+  ROUND(COUNT(DISTINCT CASE WHEN months_since_first BETWEEN 4 AND 6  THEN ca.client_id END) * 100.0 / cs.num_clients, 1) AS q2,
+
+  -- Q3: meses 7, 8, 9
+  ROUND(COUNT(DISTINCT CASE WHEN months_since_first BETWEEN 7 AND 9  THEN ca.client_id END) * 100.0 / cs.num_clients, 1) AS q3,
+
+  -- Q4: meses 10, 11, 12
+  ROUND(COUNT(DISTINCT CASE WHEN months_since_first BETWEEN 10 AND 12 THEN ca.client_id END) * 100.0 / cs.num_clients, 1) AS q4
+
+FROM cohort_activity ca
+JOIN cohort_sizes cs USING (cohort_month)
+GROUP BY ca.cohort_month, cs.num_clients
+ORDER BY ca.cohort_month;
+
+-- Q6. Cohort analysis - retención mensual (para Data Studio)
 WITH first_orders AS (
   SELECT
     client_id,

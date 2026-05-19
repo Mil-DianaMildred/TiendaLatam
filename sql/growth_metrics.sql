@@ -43,7 +43,7 @@ GROUP BY 1, 2
 ORDER BY 1, 2;
 
 
--- Q3. Clientes nuevos vs recurrentes por mes
+-- Q3. Clientes nuevos vs recurrentes por mes (último año) + % revenue
 WITH first_orders AS (
   SELECT
     client_id,
@@ -64,17 +64,21 @@ orders_classified AS (
   FROM `tiendalatam-casestudy.tiendalatam.orders` o
   JOIN first_orders fo ON o.client_id = fo.client_id
   WHERE o.order_status_id IN (3, 4)
+    AND o.registration_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
 )
 SELECT
   month,
   client_segment,
-  COUNT(DISTINCT client_id) AS clients,
-  COUNT(*) AS orders,
-  ROUND(SUM(total_amount), 2) AS revenue
+  COUNT(DISTINCT client_id)                                        AS clients,
+  COUNT(*)                                                         AS orders,
+  ROUND(SUM(total_amount), 2)                                      AS revenue,
+  ROUND(
+    SUM(total_amount) / SUM(SUM(total_amount)) OVER (PARTITION BY month) * 100
+  , 1)                                                             AS pct_revenue
 FROM orders_classified
 GROUP BY month, client_segment
+ORDER BY month, client_segment;gment
 ORDER BY month, client_segment;
-
 
 -- Q4. Performance por país (calidad operativa)
 -- total_orders cuenta todas las órdenes (base para los % operativos); revenue solo status 3-4

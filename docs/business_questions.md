@@ -170,15 +170,63 @@ SQL: `sql/more_insights.sql` Q11
 Foco: qué % de productos (categoría A) generan el 80% del revenue. ¿Cuántos SKUs son prescindibles?
 *Decisión que habilita:* curación del catálogo digital. En Tecnología se defiende el liderazgo; en el resto se evalúa si el precio es competitivo antes de invertir en marketing.
 
+Ya la resolvi arriba
+
 **A1-Q2. ¿Cuáles son los productos en riesgo de quiebre de stock?**
 SQL: `sql/more_insights.sql` Q13
 Foco: productos con alta rotación y stock bajo. Días de inventario disponible.
 *Decisión que habilita:* si un producto líder tiene quiebre de stock, la promesa de precio se rompe — el cliente va al comercio local. Esto es una alerta operativa directa a la misión.
 
+| product_id | product_name | category | stock | units_sold_last_90d | days_of_inventory | alert |
+|---|---|---|---:|---:|---:|---|
+| 4 | Parlante Portátil Caribe | Tecnología | 180 | 260 | 62.3 | Riesgo de quiebre |
+| 43 | Rompecabezas 1000 Piezas | Juguetería | 170 | 212 | 72.2 | Riesgo de quiebre |
+| 37 | Mat de Yoga Antideslizante | Deportes | 145 | 207 | 63.0 | Riesgo de quiebre |
+| 13 | Juego de Sábanas Queen | Hogar | 115 | 207 | 50.0 | Riesgo de quiebre |
+| 10 | Cafetera Programable | Hogar | 90 | 206 | 39.3 | Riesgo de quiebre |
+| 9 | Licuadora 6 Velocidades | Hogar | 120 | 201 | 53.7 | Riesgo de quiebre |
+| 41 | Casco Bicicleta Urbano | Deportes | 80 | 199 | 36.2 | Riesgo de quiebre |
+| 26 | Set Cuidado Facial | Belleza | 110 | 199 | 49.7 | Riesgo de quiebre |
+| 18 | Chaqueta Impermeable | Moda | 85 | 199 | 38.4 | Riesgo de quiebre |
+| 28 | Afeitadora Eléctrica | Belleza | 95 | 197 | 43.4 | Riesgo de quiebre |
+| 42 | Bloques de Construcción | Juguetería | 130 | 193 | 60.6 | Riesgo de quiebre |
+| 1 | Smartphone Andino X1 | Tecnología | 130 | 187 | 62.6 | Riesgo de quiebre |
+| 2 | Laptop Ultraliviana 14 | Tecnología | 64 | 187 | 30.8 | Riesgo de quiebre |
+| 38 | Mancuernas 5 kg Par | Deportes | 100 | 186 | 48.4 | Riesgo de quiebre |
+| 27 | Perfume Floral 100 ml | Belleza | 75 | 180 | 37.5 | Riesgo de quiebre |
+| 45 | Carro a Control Remoto | Juguetería | 95 | 180 | 47.5 | Riesgo de quiebre |
+| 8 | Power Bank 20000 mAh | Tecnología | 150 | 179 | 75.4 | Riesgo de quiebre |
+| 20 | Mochila Ejecutiva | Moda | 140 | 178 | 70.8 | Riesgo de quiebre |
+| 19 | Zapatillas Urbanas | Moda | 170 | 177 | 86.4 | Riesgo de quiebre |
+| 11 | Set de Ollas Antiadherentes | Hogar | 70 | 177 | 35.6 | Riesgo de quiebre |
+| 15 | Aspiradora Compacta | Hogar | 55 | 174 | 28.4 | Riesgo de quiebre |
+| 36 | Balón de Fútbol Pro | Deportes | 160 | 166 | 86.7 | Riesgo de quiebre |
+| 46 | Juego de Mesa Estrategia | Juguetería | 140 | 162 | 77.8 | Riesgo de quiebre |
+| 6 | Teclado Mecánico Compacto | Tecnología | 95 | 160 | 53.4 | Riesgo de quiebre |
+| 44 | Muñeca Articulada | Juguetería | 115 | 158 | 65.5 | Riesgo de quiebre |
+
 **A1-Q3. ¿Qué productos se compran juntos?**
 SQL: `sql/more_insights.sql` Q14
 Foco: pares de productos con mayor co-purchase rate. Base para bundles y cross-sell.
 *Decisión que habilita:* aumentar el AOV sin cambiar el catálogo. Un bundle bien diseñado refuerza la percepción de valor-precio.
+
+| product_a | product_b | orders_with_both |
+|---|---|---:|
+| Parlante Portátil Caribe | Shampoo Nutritivo | 30 |
+| Cinturón Cuero Sintético | Shampoo Nutritivo | 29 |
+| Aceite de Oliva 500 ml | Rompecabezas 1000 Piezas | 28 |
+| Parlante Portátil Caribe | Banda Elástica Resistencia | 27 |
+| Cafetera Programable | Bloques de Construcción | 25 |
+| Cinturón Cuero Sintético | Banda Elástica Resistencia | 25 |
+| Casco Bicicleta Urbano | Juego de Mesa Estrategia | 24 |
+| Aspiradora Compacta | Juego de Mesa Estrategia | 24 |
+| Camiseta Básica Algodón | Banda Elástica Resistencia | 24 |
+| Galletas Integrales | Bebida Isotónica Pack | 23 |
+| Balón de Fútbol Pro | Set de Marcadores | 23 |
+| Laptop Ultraliviana 14 | Bloques de Construcción | 23 |
+| Audífonos Bluetooth Pro | Cargador USB-C Rápido | 23 |
+| Cargador USB-C Rápido | Protector Solar FPS 50 | 23 |
+| Protector Solar FPS 50 | Set de Marcadores | 23 |
 
 **A1-Q4. ¿Nuestro precio es realmente competitivo frente al comercio local? (gap de datos)**
 Foco: comparar el precio de lista de los productos top (Laptop, Smartphone, Aspiradora) contra el precio promedio del comercio local en cada mercado.
@@ -196,6 +244,116 @@ SQL: `sql/retention_rfm.sql` Q6
 Foco: % de clientes de cada cohorte que vuelven a comprar en el mes 1, 3, 6 y 12.
 *Decisión que habilita:* si la retención mejora en cohortes recientes, hay señal de PMF. Si degrada, el problema de churn es estructural y precede a cualquier inversión en adquisición.
 
+-- Retención mensual de cohorte (12 meses)
+
+| cohort_month | num_clients | mes_0 | mes_1 | mes_2 | mes_3 | mes_4 | mes_5 | mes_6 | mes_7 | mes_8 | mes_9 | mes_10 | mes_11 | mes_12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2021-07 | 1 | 1 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 100.0 |
+| 2021-11 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2022-03 | 2 | 2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 50.0 | 50.0 | 0.0 | 50.0 | 0.0 | 0.0 |
+| 2022-05 | 1 | 1 | 100.0 | 0.0 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 0.0 |
+| 2022-06 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2022-07 | 2 | 2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 50.0 | 50.0 |
+| 2022-08 | 3 | 3 | 33.3 | 0.0 | 0.0 | 33.3 | 0.0 | 0.0 | 33.3 | 33.3 | 33.3 | 0.0 | 33.3 | 0.0 |
+| 2022-09 | 4 | 4 | 25.0 | 0.0 | 25.0 | 0.0 | 0.0 | 0.0 | 0.0 | 25.0 | 0.0 | 0.0 | 25.0 | 0.0 |
+| 2022-10 | 3 | 3 | 33.3 | 0.0 | 0.0 | 0.0 | 33.3 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 0.0 |
+| 2022-11 | 3 | 3 | 0.0 | 0.0 | 0.0 | 33.3 | 0.0 | 0.0 | 0.0 | 0.0 | 33.3 | 0.0 | 0.0 | 33.3 |
+| 2022-12 | 3 | 3 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 33.3 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2023-01 | 3 | 3 | 0.0 | 0.0 | 0.0 | 0.0 | 33.3 | 33.3 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2023-02 | 4 | 4 | 0.0 | 0.0 | 25.0 | 25.0 | 25.0 | 0.0 | 25.0 | 25.0 | 50.0 | 25.0 | 0.0 | 50.0 |
+| 2023-03 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2023-04 | 7 | 7 | 14.3 | 0.0 | 0.0 | 14.3 | 0.0 | 0.0 | 14.3 | 14.3 | 0.0 | 0.0 | 14.3 | 14.3 |
+| 2023-05 | 2 | 2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2023-06 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 |
+| 2023-08 | 6 | 6 | 0.0 | 33.3 | 16.7 | 50.0 | 0.0 | 33.3 | 0.0 | 33.3 | 16.7 | 0.0 | 16.7 | 33.3 |
+| 2023-09 | 8 | 8 | 12.5 | 12.5 | 12.5 | 0.0 | 25.0 | 0.0 | 37.5 | 0.0 | 12.5 | 25.0 | 12.5 | 0.0 |
+| 2023-10 | 4 | 4 | 50.0 | 25.0 | 25.0 | 25.0 | 50.0 | 0.0 | 25.0 | 25.0 | 0.0 | 0.0 | 50.0 | 0.0 |
+| 2023-11 | 11 | 11 | 27.3 | 9.1 | 9.1 | 18.2 | 18.2 | 9.1 | 9.1 | 0.0 | 18.2 | 0.0 | 18.2 | 45.5 |
+| 2023-12 | 8 | 8 | 12.5 | 0.0 | 12.5 | 0.0 | 37.5 | 25.0 | 37.5 | 25.0 | 37.5 | 12.5 | 25.0 | 25.0 |
+| 2024-01 | 10 | 10 | 0.0 | 0.0 | 10.0 | 0.0 | 0.0 | 10.0 | 0.0 | 0.0 | 30.0 | 30.0 | 20.0 | 30.0 |
+| 2024-02 | 7 | 7 | 0.0 | 0.0 | 0.0 | 0.0 | 28.6 | 14.3 | 14.3 | 14.3 | 57.1 | 28.6 | 42.9 | 0.0 |
+| 2024-03 | 10 | 10 | 0.0 | 0.0 | 10.0 | 10.0 | 0.0 | 10.0 | 0.0 | 10.0 | 30.0 | 0.0 | 10.0 | 10.0 |
+| 2024-04 | 4 | 4 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 25.0 | 0.0 | 0.0 | 0.0 | 25.0 | 0.0 |
+| 2024-05 | 6 | 6 | 0.0 | 16.7 | 16.7 | 33.3 | 33.3 | 50.0 | 33.3 | 16.7 | 0.0 | 0.0 | 16.7 | 33.3 |
+| 2024-06 | 7 | 7 | 14.3 | 0.0 | 0.0 | 0.0 | 0.0 | 14.3 | 28.6 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2024-07 | 15 | 15 | 13.3 | 13.3 | 0.0 | 13.3 | 20.0 | 0.0 | 0.0 | 20.0 | 0.0 | 20.0 | 6.7 | 13.3 |
+| 2024-08 | 13 | 13 | 15.4 | 7.7 | 7.7 | 23.1 | 7.7 | 7.7 | 15.4 | 7.7 | 23.1 | 7.7 | 7.7 | 7.7 |
+| 2024-09 | 10 | 10 | 20.0 | 10.0 | 40.0 | 10.0 | 30.0 | 40.0 | 10.0 | 30.0 | 20.0 | 30.0 | 20.0 | 40.0 |
+| 2024-10 | 13 | 13 | 30.8 | 23.1 | 7.7 | 7.7 | 15.4 | 30.8 | 15.4 | 7.7 | 7.7 | 23.1 | 15.4 | 7.7 |
+| 2024-11 | 18 | 18 | 11.1 | 16.7 | 0.0 | 22.2 | 5.6 | 11.1 | 0.0 | 16.7 | 5.6 | 5.6 | 16.7 | 33.3 |
+| 2024-12 | 14 | 14 | 0.0 | 21.4 | 7.1 | 14.3 | 21.4 | 7.1 | 14.3 | 21.4 | 21.4 | 28.6 | 35.7 | 21.4 |
+| 2025-01 | 13 | 13 | 0.0 | 7.7 | 15.4 | 23.1 | 30.8 | 23.1 | 15.4 | 23.1 | 0.0 | 23.1 | 7.7 | 30.8 |
+| 2025-02 | 13 | 13 | 23.1 | 38.5 | 7.7 | 23.1 | 15.4 | 30.8 | 15.4 | 30.8 | 30.8 | 38.5 | 30.8 | 23.1 |
+| 2025-03 | 19 | 19 | 10.5 | 15.8 | 15.8 | 21.1 | 10.5 | 26.3 | 15.8 | 26.3 | 31.6 | 15.8 | 15.8 | 26.3 |
+| 2025-04 | 21 | 21 | 14.3 | 14.3 | 14.3 | 23.8 | 4.8 | 28.6 | 33.3 | 38.1 | 14.3 | 33.3 | 42.9 | 28.6 |
+| 2025-05 | 24 | 24 | 12.5 | 20.8 | 12.5 | 16.7 | 25.0 | 41.7 | 41.7 | 50.0 | 29.2 | 29.2 | 37.5 | 0.0 |
+| 2025-06 | 22 | 22 | 0.0 | 13.6 | 9.1 | 13.6 | 31.8 | 22.7 | 22.7 | 0.0 | 27.3 | 18.2 | 0.0 | 0.0 |
+| 2025-07 | 19 | 19 | 15.8 | 10.5 | 10.5 | 42.1 | 26.3 | 31.6 | 21.1 | 26.3 | 21.1 | 0.0 | 0.0 | 0.0 |
+| 2025-08 | 22 | 22 | 22.7 | 31.8 | 40.9 | 40.9 | 40.9 | 31.8 | 27.3 | 27.3 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2025-09 | 18 | 18 | 16.7 | 22.2 | 22.2 | 22.2 | 27.8 | 27.8 | 22.2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2025-10 | 25 | 25 | 32.0 | 28.0 | 36.0 | 28.0 | 40.0 | 36.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2025-11 | 40 | 40 | 25.0 | 20.0 | 22.5 | 20.0 | 22.5 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2025-12 | 33 | 33 | 21.2 | 24.2 | 24.2 | 27.3 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2026-01 | 37 | 37 | 35.1 | 37.8 | 32.4 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2026-02 | 43 | 43 | 23.3 | 37.2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2026-03 | 35 | 35 | 40.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2026-04 | 46 | 46 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+
+-- Retención mensual de cohorte (trimestral)
+
+| cohort_month | num_clients | q0 | q1 | q2 | q3 | q4 |
+|---|---|---|---|---|---|---|
+| 2021-07 | 1 | 1 | 0.0 | 100.0 | 0.0 | 100.0 |
+| 2021-11 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2022-03 | 2 | 2 | 0.0 | 0.0 | 50.0 | 50.0 |
+| 2022-05 | 1 | 1 | 100.0 | 100.0 | 100.0 | 0.0 |
+| 2022-06 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2022-07 | 2 | 2 | 0.0 | 0.0 | 0.0 | 100.0 |
+| 2022-08 | 3 | 3 | 33.3 | 33.3 | 66.7 | 33.3 |
+| 2022-09 | 4 | 4 | 50.0 | 0.0 | 25.0 | 25.0 |
+| 2022-10 | 3 | 3 | 33.3 | 33.3 | 100.0 | 0.0 |
+| 2022-11 | 3 | 3 | 0.0 | 33.3 | 33.3 | 33.3 |
+| 2022-12 | 3 | 3 | 0.0 | 33.3 | 0.0 | 0.0 |
+| 2023-01 | 3 | 3 | 0.0 | 33.3 | 0.0 | 0.0 |
+| 2023-02 | 4 | 4 | 25.0 | 50.0 | 75.0 | 50.0 |
+| 2023-03 | 1 | 1 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2023-04 | 7 | 7 | 14.3 | 14.3 | 28.6 | 28.6 |
+| 2023-05 | 2 | 2 | 0.0 | 0.0 | 0.0 | 0.0 |
+| 2023-06 | 1 | 1 | 0.0 | 100.0 | 0.0 | 100.0 |
+| 2023-08 | 6 | 6 | 50.0 | 66.7 | 33.3 | 50.0 |
+| 2023-09 | 8 | 8 | 37.5 | 25.0 | 50.0 | 37.5 |
+| 2023-10 | 4 | 4 | 75.0 | 50.0 | 50.0 | 50.0 |
+| 2023-11 | 11 | 11 | 45.5 | 27.3 | 27.3 | 45.5 |
+| 2023-12 | 8 | 8 | 25.0 | 50.0 | 50.0 | 62.5 |
+| 2024-01 | 10 | 10 | 10.0 | 10.0 | 30.0 | 60.0 |
+| 2024-02 | 7 | 7 | 0.0 | 42.9 | 57.1 | 71.4 |
+| 2024-03 | 10 | 10 | 10.0 | 20.0 | 40.0 | 20.0 |
+| 2024-04 | 4 | 4 | 0.0 | 0.0 | 25.0 | 25.0 |
+| 2024-05 | 6 | 6 | 16.7 | 66.7 | 33.3 | 33.3 |
+| 2024-06 | 7 | 7 | 14.3 | 14.3 | 28.6 | 0.0 |
+| 2024-07 | 15 | 15 | 20.0 | 26.7 | 20.0 | 20.0 |
+| 2024-08 | 13 | 13 | 23.1 | 38.5 | 38.5 | 23.1 |
+| 2024-09 | 10 | 10 | 50.0 | 50.0 | 50.0 | 60.0 |
+| 2024-10 | 13 | 13 | 38.5 | 38.5 | 23.1 | 38.5 |
+| 2024-11 | 18 | 18 | 22.2 | 22.2 | 22.2 | 38.9 |
+| 2024-12 | 14 | 14 | 28.6 | 35.7 | 35.7 | 50.0 |
+| 2025-01 | 13 | 13 | 15.4 | 38.5 | 38.5 | 38.5 |
+| 2025-02 | 13 | 13 | 53.8 | 46.2 | 61.5 | 53.8 |
+| 2025-03 | 19 | 19 | 36.8 | 36.8 | 36.8 | 42.1 |
+| 2025-04 | 21 | 21 | 33.3 | 42.9 | 52.4 | 61.9 |
+| 2025-05 | 24 | 24 | 37.5 | 58.3 | 58.3 | 50.0 |
+| 2025-06 | 22 | 22 | 18.2 | 40.9 | 31.8 | 18.2 |
+| 2025-07 | 19 | 19 | 26.3 | 52.6 | 36.8 | 0.0 |
+| 2025-08 | 22 | 22 | 50.0 | 59.1 | 40.9 | 0.0 |
+| 2025-09 | 18 | 18 | 38.9 | 38.9 | 22.2 | 0.0 |
+| 2025-10 | 25 | 25 | 48.0 | 56.0 | 0.0 | 0.0 |
+| 2025-11 | 40 | 40 | 40.0 | 30.0 | 0.0 | 0.0 |
+| 2025-12 | 33 | 33 | 30.3 | 27.3 | 0.0 | 0.0 |
+| 2026-01 | 37 | 37 | 45.9 | 0.0 | 0.0 | 0.0 |
+| 2026-02 | 43 | 43 | 41.9 | 0.0 | 0.0 | 0.0 |
+| 2026-03 | 35 | 35 | 40.0 | 0.0 | 0.0 | 0.0 |
+| 2026-04 | 46 | 46 | 0.0 | 0.0 | 0.0 | 0.0 |
+
 **A2-Q5. ¿Cómo se segmentan los 636 clientes compradores con RFM?**
 SQL: `sql/retention_rfm.sql` Q7
 Foco: etiquetar a cada cliente en Champions, Loyal, At Risk, New/Promising, About to Sleep, Needs Attention, Hibernating, Lost.
@@ -206,15 +364,68 @@ SQL: `sql/retention_rfm.sql` Q8
 Foco: concentración de valor. Champions + Loyal vs el resto.
 *Decisión que habilita:* priorizar dónde actuar. Los Champions (132 clientes, 56.4% del revenue) son el activo más frágil del negocio — perder 10 de ellos duele más que perder 100 clientes nuevos.
 
+| Segmento | Clientes | Revenue | % Revenue |
+|----------|----------|---------|-----------|
+| **Champions** | 132 | $831,442 | **56.4%** |
+| Loyal | 109 | $295,228 | 20.0% |
+| At Risk | 64 | $160,325 | 10.9% |
+| New/Promising | 73 | $47,787 | 3.2% |
+| About to Sleep | 24 | $37,772 | 2.6% |
+| Needs Attention | 68 | $35,026 | 2.4% |
+| Lost | 146 | $34,819 | 2.4% |
+| Hibernating | 20 | $31,099 | 2.1% |
+
 **A2-Q7. ¿Cuál es la tasa de churn actual y cómo varía por segmento?**
 SQL: `sql/retention_rfm.sql` Q10
 Foco: % de clientes sin compra en los últimos 180 días, desglosado por tipo de cliente y segmento RFM.
 *Decisión que habilita:* cuantificar el revenue en riesgo. At Risk + Hibernating + Lost representan revenue histórico que puede reactivarse con bajo costo relativo.
 
+| total_clients | never_purchased | active_last_90d | at_risk_90_180d | churned_180d_plus | churn_rate_pct |
+|---|---|---|---|---|---|
+| 700 | 64 | 346 | 129 | 161 | 23.0 |
+
+-- Churn por tipo de cliente
+
+| client_type | total_clients | churned_clients | churn_pct |
+|---|---|---|---|
+| Minorista | 392 | 103 | 26.3 |
+| Mayorista | 118 | 29 | 24.6 |
+| VIP | 52 | 12 | 23.1 |
+| Corporativo | 74 | 17 | 23.0 |
+
+-- Churn por segmento RFM REVISAR PARECE QUE HAY UN PROBLEMA EN EL CALCULO DE RFM 
+
+| segment | total_clients | churned_clients | churn_pct |
+|---|---:|---:|---:|
+| Lost | 2 | 2 | 100.0 |
+| Hibernating | 25 | 25 | 100.0 |
+| About to Sleep | 132 | 132 | 100.0 |
+| Needs Attention | 68 | 1 | 1.5 |
+| At Risk | 91 | 1 | 1.1 |
+| Promising | 223 | 0 | 0.0 |
+| Champions | 31 | 0 | 0.0 |
+| Loyal | 64 | 0 | 0.0 |
+
 **A2-Q8. ¿Cuántos días tarda un cliente en hacer su 2da compra?**
 SQL: `sql/more_insights.sql` Q15
 Foco: mediana y distribución del time-to-second-purchase. ¿Cuál es el momento óptimo para una campaña de reengagement?
 *Decisión que habilita:* diseñar el flujo de activación digital post-primera compra. La mediana de 74 días define cuándo activar el primer touchpoint automático — antes de que el cliente enfríe.
+
+| clients_with_2nd_purchase | avg_days_between | min_days | max_days | median_days |
+|---:|---:|---:|---:|---:|
+| 389 | 132.4 | 0 | 1229 | 74 |
+
+-- Time-to-second-purchase by user type
+
+| client_type | clients_with_2nd_purchase | avg_days | min_days | max_days | median_days |
+|---|---:|---:|---:|---:|---:|
+| Corporativo | 45 | 111.8 | 3 | 363 | 60 |
+| Minorista | 236 | 127.7 | 0 | 1152 | 71 |
+| Mayorista | 72 | 150.5 | 0 | 1229 | 89 |
+| VIP | 36 | 153.1 | 1 | 859 | 52 |
+
+-- Time-to-second-purchase by RFM REVISAR PARECE QUE HAY UN PROBLEMA EN EL CALCULO DE RFM
+
 
 **A2-Q9b. ¿Las órdenes en estado "Pendiente" y "Procesando" representan un cuello de botella con impacto en retención?**
 Foco: volumen de órdenes en estados intermedios (296 Pendiente + 350 Procesando = 16.2% del total). ¿Hay clientes con múltiples órdenes atascadas? ¿Se correlaciona con menor frecuencia de recompra?
@@ -226,6 +437,27 @@ SQL: `sql/retention_rfm.sql` Q9
 Foco: LTV acumulado de Minorista vs Mayorista vs Corporativo vs VIP.
 *Decisión que habilita:* validar si el mix de adquisición está alineado con la misión. Si el LTV de Minoristas es bajo en comparación con Corporativos, hay una tensión con el posicionamiento hacia el consumidor individual.
 
+```markdown
+| client_type | clients | avg_ltv | avg_orders_per_client | segment_revenue |
+|-------------|--------:|--------:|----------------------:|----------------:|
+| Corporativo | 80 | $2,425.62 | 4.78 | $179,496.10 |
+| Minorista | 432 | $2,387.61 | 4.87 | $935,941.30 |
+| VIP | 60 | $2,347.58 | 4.92 | $122,074.10 |
+| Mayorista | 128 | $1,999.88 | 4.47 | $235,985.70 |
+```
+
+Lo que llama la atención inmediatamente: El spread entre el LTV más alto (Corporativo $2,425) y el más bajo (Mayorista $1,999) es de apenas 17%. Para un negocio con 4 tipos de cliente tan distintos, eso es casi plano — y eso es una señal de alerta, no de salud.
+
+El problema con cada segmento:
+
+Corporativo ($2,425 LTV) — lidera, pero apenas. Un cliente corporativo debería tener 5-8x el LTV de un minorista en retail. Que sea solo 1.6% mayor sugiere que no se está capturando el valor diferencial de este segmento. Probable causa: sin pricing especial, sin volumen mínimo, sin contrato.
+
+Minorista ($2,387 LTV) — prácticamente empata con Corporativo con 432 clientes. Esto significa que el negocio está siendo sostenido estructuralmente por su base más masiva y menos rentable en términos unitarios. Es señal de que no hay diferenciación real de propuesta de valor por segmento.
+
+VIP ($2,347 LTV) — es el más contraintuitivo. El segmento "premium" tiene el tercer LTV más bajo. Si VIP existe como categoría, debería tener el LTV más alto con diferencia. Que no sea así sugiere que el criterio de asignación VIP no está correlacionado con valor real, o que no hay beneficios exclusivos que incentiven mayor gasto.
+
+Mayorista ($1,999 LTV) — el único que se diferencia hacia abajo, pero con solo 4.47 órdenes promedio cuando debería ser el segmento de mayor frecuencia de compra. Un mayorista que compra 4 veces en 5 años no está siendo mayorista en la práctica.
+
 **A2-Q9c. ¿Vale la pena la apuesta por clientes VIP y Corporativos, o están desviando foco de la misión?**
 Foco: comparar LTV, frecuencia de compra, AOV y churn rate de VIP/Corporativo (136 clientes, 20.46% del revenue) vs Minorista (392 clientes, 63.52% del revenue). ¿El costo de adquirir y retener un cliente Corporativo se justifica frente al volumen de Minoristas?
 *Decisión que habilita:* la misión apunta al "cualquier latinoamericano" — consumidor individual, no empresa. Si el LTV de Corporativos es muy superior pero hay pocos, hay una tensión estratégica: ¿estamos sirviendo a quien dijimos que serviríamos? Esta pregunta no tiene una respuesta correcta, pero un PM debe poder articularla con datos.
@@ -234,6 +466,33 @@ Foco: comparar LTV, frecuencia de compra, AOV y churn rate de VIP/Corporativo (1
 SQL: `sql/growth_metrics.sql` Q3
 Foco: evolución mensual de la proporción nuevos/recurrentes. ¿El negocio está madurando o todavía depende de adquisición?
 *Decisión que habilita:* un negocio sano en la etapa de TiendaLatam debería ver la curva de recurrentes crecer en términos absolutos. Si no, hay un problema de retención que ningún gasto en adquisición puede resolver.
+
+| month | client_segment | clients | orders | revenue | pct_revenue |
+|-------|---------------|--------:|-------:|--------:|------------:|
+| 2025-05 | Nuevo | 8 | 8 | $1,590.00 | 13.5% |
+| 2025-05 | Recurrente | 21 | 22 | $10,230.70 | 86.5% |
+| 2025-06 | Nuevo | 20 | 22 | $9,913.80 | 24.5% |
+| 2025-06 | Recurrente | 42 | 54 | $30,630.50 | 75.5% |
+| 2025-07 | Nuevo | 17 | 18 | $7,339.50 | 18.0% |
+| 2025-07 | Recurrente | 52 | 58 | $33,393.70 | 82.0% |
+| 2025-08 | Nuevo | 15 | 18 | $8,441.75 | 20.6% |
+| 2025-08 | Recurrente | 64 | 79 | $32,477.75 | 79.4% |
+| 2025-09 | Nuevo | 17 | 19 | $12,339.40 | 30.7% |
+| 2025-09 | Recurrente | 53 | 60 | $27,799.10 | 69.3% |
+| 2025-10 | Nuevo | 22 | 26 | $10,537.90 | 20.7% |
+| 2025-10 | Recurrente | 65 | 84 | $40,299.60 | 79.3% |
+| 2025-11 | Nuevo | 34 | 38 | $19,735.25 | 16.4% |
+| 2025-11 | Recurrente | 127 | 217 | $100,829.40 | 83.6% |
+| 2025-12 | Nuevo | 31 | 38 | $22,414.60 | 16.3% |
+| 2025-12 | Recurrente | 137 | 228 | $114,940.70 | 83.7% |
+| 2026-01 | Nuevo | 32 | 41 | $17,254.85 | 15.5% |
+| 2026-01 | Recurrente | 117 | 183 | $93,890.10 | 84.5% |
+| 2026-02 | Nuevo | 39 | 43 | $20,726.95 | 19.3% |
+| 2026-02 | Recurrente | 117 | 191 | $86,677.70 | 80.7% |
+| 2026-03 | Nuevo | 31 | 44 | $15,374.60 | 11.3% |
+| 2026-03 | Recurrente | 147 | 269 | $120,399.05 | 88.7% |
+| 2026-04 | Nuevo | 39 | 149 | $77,139.80 | 35.0% |
+| 2026-04 | Recurrente | 156 | 310 | $143,318.70 | 65.0% |
 
 ---
 
