@@ -45,10 +45,10 @@ Crear en la fuente indicada. En Looker Studio: editar fuente de datos → **Agre
 
 **En `v_orders_enriched`:**
 
-```
-Revenue (campo calculado)
-= SUM(CASE WHEN is_valid_revenue = 1 THEN total_amount ELSE 0 END)
+`revenue` ya está calculado en la vista — usar directamente `SUM(revenue)`. No crear campo calculado.
+`total_amount` contiene el GMV bruto (todas las órdenes); usarlo solo cuando se quiera comparar GMV vs revenue.
 
+```
 % Entregado
 = SUM(is_delivered) / COUNT(order_id)
 
@@ -61,6 +61,8 @@ Revenue (campo calculado)
 % En proceso (Pendiente + Procesando)
 = SUM(is_in_progress) / COUNT(order_id)
 ```
+
+Lo mismo aplica a `v_order_lines`: usar `SUM(revenue)` para revenue real, `SUM(line_total)` para GMV bruto por línea.
 
 **En `v_monthly_metrics`:**
 

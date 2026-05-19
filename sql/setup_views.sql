@@ -18,6 +18,7 @@ SELECT
   o.employee_id,
   o.registration_date,
   o.total_amount,
+  CASE WHEN o.order_status_id IN (3, 4) THEN o.total_amount ELSE 0 END AS revenue,
   o.order_status_id,
   os.name                                   AS order_status,
   CONCAT(c.name, ' ', c.last_name)          AS client_full_name,
@@ -52,7 +53,9 @@ SELECT
   od.product_id,
   od.quantity,
   od.unit_price,
-  od.quantity * od.unit_price AS line_total,
+  od.quantity * od.unit_price                                             AS line_total,
+  CASE WHEN o.order_status_id IN (3, 4) THEN od.quantity * od.unit_price
+       ELSE 0 END                                                         AS revenue,
   p.product_name,
   p.price                     AS list_price,
   ca.name                     AS category,
