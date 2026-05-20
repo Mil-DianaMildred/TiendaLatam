@@ -179,7 +179,9 @@ Es At Risk o Hibernating
 
 **Configuración:**
 - Scorecards: fuente `v_executive_health`. Los campos `pct_delivered`, `pct_in_progress`, `pct_cancelled`, `pct_returned` ya están calculados en la vista.
+
 - Tabla de países: fuente `v_country_performance`. Activar "Barra de datos" en `revenue` y "Escala de color" en `pct_cancelled` y `pct_returned`. Valores altos en alerta negativa (`#D50E35`), valores bajos en éxito (`#4CAF7A`).
+
 - Scatter: fuente `v_country_performance`. Eje X = `pct_cancelled`, eje Y = `revenue_per_month_active`, etiqueta = `country`. Añadir líneas de referencia en los promedios de ambos ejes para delimitar cuadrantes.
 - Barras apiladas de órdenes por país: fuente `v_orders_enriched`, dimensión `month` + series `country`, métrica `COUNT(order_id)`.
 
@@ -190,7 +192,7 @@ Es At Risk o Hibernating
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │ Products & Catalog       [Fecha] [País] [Tipo cliente]           │
-├──────────────────────────────┬───────────────────────────────────┤
+├──────────────────────────────┬───────────────────────────────────┤ 
 │ Treemap categoría → producto │ Revenue por categoría — barras    │
 │ Fuente: v_order_lines        │ Fuente: v_order_lines             │
 │ filtro: status IN (3,4)      │ filtro: status IN (3,4)           │
