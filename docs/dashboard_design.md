@@ -146,7 +146,7 @@ Es At Risk o Hibernating
 **Configuración:**
 - Scorecard Revenue del período: fuente `v_monthly_metrics`, métrica `revenue`. Activar comparación con período anterior.
 - Scorecard Crecimiento MoM: fuente `v_monthly_metrics`, métrica `mom_growth_pct`. Activar comparación con período anterior.
-- Scorecard AOV: fuente `v_executive_health`, métrica `avg_order_value`. Activar comparación con período anterior.
+- Scorecard AOV: fuente v_orders_enriched, métrica AVG(total_amount), filtro is_valid_revenue = 1. Activar comparación con período anterior.
 - Scorecard % Revenue Recurrente: fuente `v_monthly_metrics`, campo calculado `% Revenue Recurrente`.
 - Barras apiladas: fuente `v_monthly_metrics`. Serie 1 = `new_client_revenue` (acento secundario `#74ACDF`), serie 2 = `recurring_client_revenue` (acento principal `#052DA6`).
 - Barras de revenue por país: fuente `v_country_performance`, dimensión `country`, métrica `revenue`. Ordenar descendente.
