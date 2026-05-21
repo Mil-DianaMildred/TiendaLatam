@@ -307,14 +307,6 @@ En páginas que combinan múltiples fuentes (p. ej., Página 3 usa `v_orders_enr
 
 ---
 
-## 6. Publicar y compartir
-
-1. Botón **Compartir** → **Administrar acceso** → cambiar a **"Cualquier persona con el enlace puede ver"**.
-2. Copia el link y pruébalo en una ventana incógnito.
-3. Para embeber: **Compartir → Insertar informe** → copia el iframe. Ancho = 100% del contenedor.
-
----
-
 ## 7. Trucos de Looker Studio
 
 - **Tabla pivote para cohortes**: en lugar de una tabla normal, usa Insertar → Tabla pivote. Filas = `cohort_month`, columnas = `months_since_first`, valor = `retention_pct`. Agrega escala de color al valor.
@@ -324,20 +316,3 @@ En páginas que combinan múltiples fuentes (p. ej., Página 3 usa `v_orders_enr
 - **Filtros cruzados**: habilitar la interacción entre gráficos (clic en una barra filtra los demás) desde Recurso → Gestionar filtros → Habilitar filtrado cruzado.
 - **Bookmarks por país o período**: duplica una página con filtros prefijados para presentaciones ejecutivas rápidas.
 
----
-
-## 8. Checklist antes de publicar
-
-- [ ] Las 9 vistas están creadas en BigQuery (ejecutar `sql/setup_views.sql`).
-- [ ] Las 9 fuentes de datos están conectadas en Looker Studio.
-- [ ] Los campos calculados (`% Entregado`, `% Cancelado`, `% Devuelto`, `% En proceso`, `% Revenue Recurrente`, `Es Champion`, `Es At Risk o Hibernating`) están creados en cada fuente correspondiente.
-- [ ] Los 6 títulos de página son descriptivos y neutrales (sin valores hardcodeados ni conclusiones).
-- [ ] Los títulos de cada visual son descriptivos (sin frases narrativas ni referencias a períodos específicos).
-- [ ] Los filtros globales (fecha, país, tipo cliente) funcionan en todas las visualizaciones de cada página.
-- [ ] Los controles de filtro en páginas con múltiples fuentes están asociados a todas las fuentes de esa página.
-- [ ] La tabla At Risk en Página 5 tiene el botón de descarga habilitado.
-- [ ] El heatmap de cohortes (Página 6) muestra la escala de color correctamente y las columnas están limitadas a 0–12.
-- [ ] El scatter de stock (Página 4) colorea los puntos por `stock_alert`.
-- [ ] La paleta de colores es consistente en las 6 páginas.
-- [ ] El link público funciona en ventana incógnito.
-- [ ] El dashboard se ve bien en monitor 1080p y en pantalla de laptop (13").

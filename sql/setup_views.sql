@@ -333,34 +333,42 @@ LEFT JOIN sales_90d s ON p.product_id = s.product_id
 ORDER BY days_of_inventory ASC NULLS LAST;
 
 
--- Vista 9: Performance por país
--- Usada en las páginas de Resumen Ejecutivo y Operación & Expansión.
--- Consolida revenue, AOV, salud operativa y madurez de mercado por país.
--- No es reproducible en Looker Studio (requiere MIN(date) + DATE_DIFF).
-CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_country_performance` AS
+CREATE OR REPLACE VIEW `tiendalatam-casestudy.tiendalatam.v_country_clienttype_performance` AS
 SELECT
-  co.name                                                                AS country,
-  MIN(o.registration_date)                                               AS first_order_date,
-  DATE_DIFF(CURRENT_DATE(), MIN(o.registration_date), MONTH)             AS months_active,
+  co.name                                                                  AS country,
+  ct.name                                                                  AS client_type,
+  MIN(o.registration_date)                                                 AS first_order_date,
+  MAX(o.registration_date)                                                 AS last_order_date,
+  DATE_DIFF(CURRENT_DATE(), MIN(o.registration_date), MONTH)               AS months_active,
   COUNT(DISTINCT CASE WHEN o.order_status_id IN (3, 4)
-                      THEN o.client_id END)                              AS total_buyers,
-  COUNT(o.order_id)                                                      AS total_orders,
-  COUNTIF(o.order_status_id IN (3, 4))                                   AS valid_orders,
+                      THEN o.client_id END)                                AS total_buyers,
+  COUNT(o.order_id)                                                        AS total_orders,
+  COUNTIF(o.order_status_id IN (3, 4))                                     AS valid_orders,
   ROUND(SUM(CASE WHEN o.order_status_id IN (3, 4)
-                 THEN o.total_amount ELSE 0 END), 2)                     AS revenue,
+                 THEN o.total_amount ELSE 0 END), 2)                       AS revenue,
   ROUND(AVG(CASE WHEN o.order_status_id IN (3, 4)
-                 THEN o.total_amount END), 2)                            AS aov,
-  ROUND(100 * COUNTIF(o.order_status_id = 4) / COUNT(o.order_id), 2)    AS pct_delivered,
-  ROUND(100 * COUNTIF(o.order_status_id = 5) / COUNT(o.order_id), 2)    AS pct_cancelled,
-  ROUND(100 * COUNTIF(o.order_status_id = 6) / COUNT(o.order_id), 2)    AS pct_returned,
+                 THEN o.total_amount END), 2)                              AS aov,
+  ROUND(
+    100 * COUNTIF(o.order_status_id = 4)
+    / NULLIF(COUNTIF(o.order_status_id IN (4, 5, 6)), 0),
+  2)                                                                       AS pct_delivered,
+  ROUND(
+    100 * COUNTIF(o.order_status_id = 5)
+    / NULLIF(COUNTIF(o.order_status_id IN (4, 5, 6)), 0),
+  2)                                                                       AS pct_cancelled,
+  ROUND(
+    100 * COUNTIF(o.order_status_id = 6)
+    / NULLIF(COUNTIF(o.order_status_id IN (4, 5, 6)), 0),
+  2)                                                                       AS pct_returned,
   ROUND(
     SUM(CASE WHEN o.order_status_id IN (3, 4) THEN o.total_amount ELSE 0 END)
     / NULLIF(DATE_DIFF(CURRENT_DATE(), MIN(o.registration_date), MONTH), 0),
-  2)                                                                     AS revenue_per_month_active
+  2)                                                                       AS revenue_per_month_active
 FROM `tiendalatam-casestudy.tiendalatam.orders` o
-JOIN `tiendalatam-casestudy.tiendalatam.clients` c   ON o.client_id = c.client_id
-JOIN `tiendalatam-casestudy.tiendalatam.countries` co ON c.country_id = co.country_id
-GROUP BY co.name
+JOIN `tiendalatam-casestudy.tiendalatam.clients` c       ON o.client_id      = c.client_id
+JOIN `tiendalatam-casestudy.tiendalatam.countries` co    ON c.country_id     = co.country_id
+JOIN `tiendalatam-casestudy.tiendalatam.client_types` ct ON c.client_type_id = ct.client_type_id
+GROUP BY co.name, ct.name
 ORDER BY revenue DESC;
 
 
