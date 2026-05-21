@@ -15,7 +15,7 @@ En Looker Studio → **Crear → Fuente de datos → BigQuery → tiendalatam-ca
 | `v_orders_enriched` | Todas | KPIs operativos, filtros globales |
 | `v_monthly_metrics` | 1, 2, 6 | Revenue mensual, nuevo vs recurrente, MoM |
 | `v_executive_health` | 1, 2, 3, 5, 6 | Scorecards (churn, champions %, métricas operativas) |
-| `v_country_performance` | 1, 3 | Revenue por país, madurez de mercado |
+| `v_country_clienttype_performance` | 1, 3 | Revenue por país, madurez de mercado |
 | `v_rfm_segments` | 5, 6 | Segmentos RFM, At Risk, distribución de clientes |
 | `v_cohort_retention` | 6 | Heatmap de retención por cohorte |
 | `v_abc_classification` | 4 | Clasificación A/B/C por producto |
@@ -103,7 +103,7 @@ Es At Risk o Hibernating
 ├───────────────────────────────┬──────────────────────────────────┤
 │ Revenue por país              │ Distribución de estados          │
 │ Mapa geográfico LATAM         │ de órdenes — donut               │
-│ Fuente: v_country_performance │ Fuente: v_orders_enriched        │
+│ Fuente: v_country_clienttype_performance │ Fuente: v_orders_enriched        │
 │ métrica: revenue              │ dimensión: order_status          │
 │                               │ métrica: COUNT(order_id)         │
 └───────────────────────────────┴──────────────────────────────────┘
@@ -112,7 +112,7 @@ Es At Risk o Hibernating
 **Configuración:**
 - Scorecards (fila superior): fuente `v_executive_health`. Activar "Comparación con período anterior" en Revenue, AOV y Clientes activos.
 - Revenue mensual: fuente `v_monthly_metrics`, dimensión `month`, métrica `revenue`. Gráfico de línea simple.
-- Mapa: fuente `v_country_performance`, dimensión `country` (tipo Geo → País), métrica `revenue`. Gradiente de color desde el acento secundario al acento principal.
+- Mapa: fuente `v_country_clienttype_performance`, dimensión `country` (tipo Geo → País), métrica `revenue`. Gradiente de color desde el acento secundario al acento principal.
 - Donut de estados: fuente `v_orders_enriched`, dimensión `order_status`, métrica `COUNT(order_id)`. Colores: Entregado = `#4CAF7A`, Enviado = `#74ACDF`, Pendiente/Procesando = `#FDD315`, Cancelado/Devuelto = `#D50E35`.
 
 ---
@@ -134,7 +134,7 @@ Es At Risk o Hibernating
 ├──────────────────────────────────┬───────────────────────────────┤
 │ Revenue por país — barras        │ AOV por tipo de cliente       │
 │ horizontales                     │ por trimestre — líneas        │
-│ Fuente: v_country_performance    │ Fuente: v_orders_enriched     │
+│ Fuente: v_country_clienttype_performance    │ Fuente: v_orders_enriched     │
 │ dimensión: country               │ dimensión: DATE_TRUNC(        │
 │ métrica: revenue · orden desc    │   registration_date, QUARTER) │
 │                                  │ series: client_type           │
@@ -149,7 +149,7 @@ Es At Risk o Hibernating
 - Scorecard AOV: fuente v_orders_enriched, métrica AVG(total_amount), filtro is_valid_revenue = 1. Activar comparación con período anterior.
 - Scorecard % Revenue Recurrente: fuente `v_monthly_metrics`, campo calculado `% Revenue Recurrente`.
 - Barras apiladas: fuente `v_monthly_metrics`. Serie 1 = `new_client_revenue` (acento secundario `#74ACDF`), serie 2 = `recurring_client_revenue` (acento principal `#052DA6`).
-- Barras de revenue por país: fuente `v_country_performance`, dimensión `country`, métrica `revenue`. Ordenar descendente.
+- Barras de revenue por país: fuente `v_country_clienttype_performance`, dimensión `country`, métrica `revenue`. Ordenar descendente.
 - Líneas de AOV por tipo: fuente `v_orders_enriched` con filtro `order_status_id IN (3, 4)`. Dimensión de tiempo = `DATE_TRUNC(registration_date, QUARTER)`, series = `client_type`, métrica = `AVG(total_amount)`.
 
 ---
@@ -165,12 +165,12 @@ Es At Risk o Hibernating
 │ Performance operativa por país — tabla con color condicional      │
 │ columnas: país | meses activo | revenue | revenue/mes | AOV      │
 │           | % entregado | % cancelado | % devuelto               │
-│ Fuente: v_country_performance · ordenar por revenue desc         │
+│ Fuente: v_country_clienttype_performance · ordenar por revenue desc         │
 │ Color condicional en % cancelado y % devuelto                    │
 ├──────────────────────────────────┬───────────────────────────────┤
 │ Revenue/mes activo vs tasa de    │ Órdenes mensuales por país    │
 │ cancelación — scatter            │ barras apiladas               │
-│ Fuente: v_country_performance    │ Fuente: v_orders_enriched     │
+│ Fuente: v_country_clienttype_performance    │ Fuente: v_orders_enriched     │
 │ X: pct_cancelled                 │ dimensión: month + country    │
 │ Y: revenue_per_month_active      │ métrica: COUNT(order_id)      │
 │ etiqueta: country                │                               │
@@ -180,9 +180,9 @@ Es At Risk o Hibernating
 **Configuración:**
 - Scorecards: fuente `v_executive_health`. Los campos `pct_delivered`, `pct_in_progress`, `pct_cancelled`, `pct_returned` ya están calculados en la vista.
 
-- Tabla de países: fuente `v_country_performance`. Activar "Barra de datos" en `revenue` y "Escala de color" en `pct_cancelled` y `pct_returned`. Valores altos en alerta negativa (`#D50E35`), valores bajos en éxito (`#4CAF7A`).
+- Tabla de países: fuente `v_country_clienttype_performance`. Activar "Barra de datos" en `revenue` y "Escala de color" en `pct_cancelled` y `pct_returned`. Valores altos en alerta negativa (`#D50E35`), valores bajos en éxito (`#4CAF7A`).
 
-- Scatter: fuente `v_country_performance`. Eje X = `pct_cancelled`, eje Y = `revenue_per_month_active`, etiqueta = `country`. Añadir líneas de referencia en los promedios de ambos ejes para delimitar cuadrantes.
+- Scatter: fuente `v_country_clienttype_performance`. Eje X = `pct_cancelled`, eje Y = `revenue_per_month_active`, etiqueta = `country`. Añadir líneas de referencia en los promedios de ambos ejes para delimitar cuadrantes.
 - Barras apiladas de órdenes por país: fuente `v_orders_enriched`, dimensión `month` + series `country`, métrica `COUNT(order_id)`.
 
 ---
@@ -303,7 +303,7 @@ Crear estos controles en cada página. Para replicarlos: copiar el control → p
 | Tipo de cliente | Drop-down list | `v_orders_enriched` | `client_type` | Todas las páginas |
 | Categoría | Drop-down list | `v_order_lines` | `category` | Página 4 |
 
-En páginas que combinan múltiples fuentes (p. ej., Página 3 usa `v_orders_enriched` y `v_country_performance`), asegúrate de que cada control de filtro esté asociado a todas las fuentes presentes en esa página.
+En páginas que combinan múltiples fuentes (p. ej., Página 3 usa `v_orders_enriched` y `v_country_clienttype_performance`), asegúrate de que cada control de filtro esté asociado a todas las fuentes presentes en esa página.
 
 ---
 
