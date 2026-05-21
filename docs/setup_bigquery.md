@@ -130,16 +130,6 @@ Crear esta vista te ahorra los joins en cada visual del dashboard.
 
 Repite el paso para cada tabla/vista que necesites en el dashboard. Una práctica común: crea un "informe" en Looker Studio con varias fuentes de datos, y úsalas para distintos visuales.
 
-## Paso 9 — Compartir el dashboard
-
-Cuando tengas tu dashboard listo:
-
-1. Botón **Compartir** arriba a la derecha.
-2. Pestaña **Administrar accesos** → cambia a **"Cualquier persona con el enlace puede ver"**.
-3. Copia el link → ese link va a tu website y CV.
-
-Para incrustar en tu website: botón **Compartir → Insertar informe**. Te da un iframe HTML que puedes pegar directamente.
-
 ---
 
 ## Comandos útiles para mantener el proyecto

@@ -39,15 +39,9 @@ Tareas:
 - Calcular la North Star Metric candidata. Mi recomendación para retail digital: "ingresos generados por clientes recurrentes en los últimos 90 días". Justifica por qué la elegiste.
 - Identificar los 3 países con mejor performance y los 3 con peor, y formular hipótesis del porqué.
 
-Entregable: archivo `docs/business_questions.md` actualizado con respuestas a las preguntas Q1-Q5 y una primera versión de tu North Star Metric.
-
-Tiempo estimado: 3-4 horas.
-
-Tip PM: no te quedes en "Argentina vendió X". Avanza a "Argentina creció X% pero su ticket promedio bajó Y%, lo cual sugiere que estamos vendiendo más unidades pero más baratas — vale la pena revisar el mix de categorías". En un modelo online, también pregunta: ¿hay diferencias en el canal de adquisición o en el comportamiento de compra digital entre países?
-
 ---
 
-## Día 3 — Retención, cohortes y RFM
+## Retención, cohortes y RFM
 
 **Objetivo:** este es el corazón del proyecto y lo que más impresiona en una entrevista de PM.
 
@@ -56,15 +50,9 @@ Tareas:
 - Construir el perfil de los 8 segmentos RFM: Champions, Loyal, At Risk, New/Promising, About to Sleep, Needs Attention, Hibernating, Lost. Calcular cuántos hay, cuánto facturan y qué porcentaje del revenue total representan. (Referencia: Champions son 132 clientes que concentran el 56.4% del revenue.)
 - Calcular LTV promedio por tipo de cliente (Minorista, Mayorista, Corporativo, VIP).
 
-Entregable: tabla de cohortes lista para visualizar, segmentación RFM con cada cliente etiquetado, y 3 recomendaciones de producto basadas en los hallazgos.
-
-Tiempo estimado: 4-5 horas.
-
-Tip PM: termina este día con una respuesta concreta a "si fueras PM de TiendaLatam, ¿qué propondrías como próximo experimento de retención en un canal 100% digital?". Esa respuesta es oro en una entrevista.
-
 ---
 
-## Día 4 — Dashboard en Looker Studio
+## Dashboard en Looker Studio
 
 **Objetivo:** materializar los hallazgos en un dashboard ejecutivo publicado en la nube.
 
@@ -80,15 +68,15 @@ Tareas:
 - Aplicar la paleta de colores definida en `docs/dashboard_design.md`.
 - Crear al menos 2 campos calculados (% Cancelación, Es Champion) para mostrar dominio de la herramienta.
 
-Entregable: dashboard publicado con link público + 4 capturas para el sitio web.
+---
 
-Tiempo estimado: 4-5 horas.
+## Informe final
 
-Tip PM: pon títulos con conclusión, no descriptivos. En vez de "Revenue por mes", escribe "Abril 2026 fue el mejor mes con $220K — crecimiento sostenido desde 2021".
+pendiente
 
 ---
 
-## Día 5 — Storytelling y publicación
+## Storytelling y publicación
 
 **Objetivo:** convertir el proyecto en una pieza de portafolio digna de un PM senior.
 
@@ -134,9 +122,4 @@ Lo que demuestra cada parte:
 - Hacer un análisis competitivo de TiendaLatam vs tiendas locales de cada país y vs players regionales (Mercado Libre, Falabella, Linio) — el diferenciador clave es precio.
 - Construir un funnel ficticio (visitas → carrito → checkout → entregado) e identificar el cuello de botella.
 - Forecast simple de revenue con función LAG/LEAD o regresión lineal en Power BI.
-
-
-??? Ejecutar `sql/setup_views.sql` para crear las 5 vistas analíticas.
-
-![alt text](image.png)
 

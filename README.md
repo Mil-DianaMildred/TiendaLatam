@@ -69,9 +69,9 @@ proyecto-tiendalatam/
 | countries | 10 | Países LATAM |
 | positions | 5 | Cargos del equipo |
 
-## Hallazgos principales
+## Hallazgos principales PENDIENTE ACTUALIZAR
 
-Tres hallazgos validados contra los datos:
+Tres hallazgos validados contra los datos: 
 
 - **132 clientes Champions generan el 56.4% del revenue** total — concentración de valor más pronunciada que la regla de Pareto clásica.
 - **Ecuador y Perú lideran en revenue** ($195K y $183K respectivamente), pero **Argentina tiene el AOV más alto** ($563) a pesar de tener menos órdenes.
