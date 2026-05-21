@@ -23,23 +23,34 @@ Ver `ARCHITECTURE.md` para el diagrama completo del flujo de datos.
 
 ```
 proyecto-tiendalatam/
-├── README.md                       # Este archivo
-├── ROADMAP.md                      # Plan de ejecución de 5 días
-├── ARCHITECTURE.md                 # Cómo está montado el proyecto técnicamente
-├── data_expanded/                  # CSVs del dataset (11 tablas, ~17k filas)
+├── README.md                           # Este archivo
+├── ROADMAP.md                          # Plan de ejecución de 5 días
+├── ARCHITECTURE.md                     # Diagrama del flujo de datos
+├── image.png                           # Captura del dashboard en Looker Studio
+├── data_expanded/                      # CSVs del dataset (11 tablas, ~17k filas)
+│   └── README.md                       # Descripción de cada archivo CSV
 ├── sql/
-│   ├── setup_views.sql             # Vistas analíticas para Looker Studio
-│   ├── schema.sql                  # DDL Postgres (referencia, no usado)
-│   ├── exploratory.sql             # Exploración inicial
-│   ├── growth_metrics.sql          # KPIs de crecimiento
-│   ├── retention_rfm.sql           # Cohortes y segmentación RFM
-│   └── more_insights.sql           # Preguntas de Product Management
+│   ├── setup_views.sql                 # 9 vistas analíticas para Looker Studio
+│   ├── schema.sql                      # DDL Postgres (referencia, no usado en BQ)
+│   ├── exploratory.sql                 # Exploración inicial del dataset
+│   ├── growth_metrics.sql              # KPIs de crecimiento
+│   ├── growth_mom_by_country.sql       # Crecimiento MoM desglosado por país
+│   ├── growth_mom_colombia.sql         # Análisis detallado Colombia
+│   ├── retention_rfm.sql               # Cohortes y segmentación RFM
+│   ├── rfm_segmentation.sql            # Query de segmentación RFM standalone
+│   ├── rfm_segments_summary.sql        # Resumen de distribución por segmento RFM
+│   └── more_insights.sql               # Preguntas adicionales de Product Management
 └── docs/
-    ├── setup_bigquery.md           # Guía paso a paso de setup
-    ├── data_model.md               # Diccionario de datos
-    ├── business_questions.md       # Las 15 preguntas que responde el proyecto
-    ├── findings_preliminary.md     # Resultados ejecutados contra los datos reales
-    └── dashboard_design.md         # Estructura del dashboard en Looker Studio
+    ├── setup_bigquery.md               # Guía paso a paso de setup en BigQuery
+    ├── data_model.md                   # Diccionario de datos y relaciones
+    ├── business_questions.md           # Las 15 preguntas que responde el proyecto
+    ├── business_mission_and_strategy.md# Misión, contexto estratégico y pivote digital
+    ├── benchmark_tiendalatam_latam.md  # Benchmark competitivo en LATAM
+    ├── icp_analysis.md                 # Análisis del perfil de cliente ideal (ICP)
+    ├── product_growth_metrics_ref.md   # Referencia de métricas de product growth
+    ├── findings_preliminary.md         # Hallazgos ejecutados contra los datos reales
+    ├── early_notes.md                  # Notas exploratorias iniciales
+    └── dashboard_design.md             # Estructura del dashboard en Looker Studio
 ```
 
 ## Dataset

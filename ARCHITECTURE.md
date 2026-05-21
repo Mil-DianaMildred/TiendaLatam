@@ -30,11 +30,16 @@ Los CSVs originales se cargan en BigQuery (data warehouse en la nube), donde el 
 │    countries, client_types, order_statuses,      │
 │    positions                                     │
 │                                                  │
-│  Vistas analíticas (creadas con SQL):            │
-│    v_orders_enriched     (orders + joins)        │
-│    v_monthly_revenue     (revenue agregado)      │
-│    v_rfm_segments        (clientes segmentados)  │
-│    v_cohort_retention    (matriz de cohortes)    │
+│  Vistas analíticas (creadas con setup_views.sql): │
+│    v_orders_enriched          (orders + joins)   │
+│    v_monthly_metrics          (revenue mensual)  │
+│    v_executive_health         (scorecards KPI)   │
+│    v_country_clienttype_performance (por país)   │
+│    v_rfm_segments             (segmentos RFM)    │
+│    v_cohort_retention         (cohortes)         │
+│    v_abc_classification       (clasificación ABC)│
+│    v_stock_alerts             (alertas stock)    │
+│    v_order_lines              (líneas de pedido) │
 │                                                  │
 │  Costo: $0 (sandbox sin tarjeta)                 │
 └────────────────────────┬─────────────────────────┘
@@ -48,10 +53,12 @@ Los CSVs originales se cargan en BigQuery (data warehouse en la nube), donde el 
 │  Informe: TiendaLatam – Growth & Retention       │
 │                                                  │
 │  Páginas:                                        │
-│    1. Resumen Ejecutivo                          │
-│    2. Growth (MoM, nuevos vs recurrentes)        │
-│    3. Producto (ABC, market basket)              │
-│    4. Clientes (RFM, cohortes, churn)            │
+│    1. Overview                                   │
+│    2. Revenue & Finance                          │
+│    3. Orders & Operations                        │
+│    4. Products & Catalog                         │
+│    5. Customers                                  │
+│    6. Retention & Cohorts                        │
 │                                                  │
 │  Costo: $0 (gratuito siempre)                    │
 └────────────────────────┬─────────────────────────┘
@@ -78,7 +85,7 @@ BigQuery es un data warehouse serverless de Google. "Serverless" significa que t
 **Qué hace en este proyecto:**
 - Guardar las 11 tablas originales.
 - Ejecutar todas las consultas SQL del análisis (las del repositorio `sql/`).
-- Materializar vistas analíticas (queries pre-calculadas) para que Looker Studio no las recompute en cada carga.
+- Materializar 9 vistas analíticas (queries pre-calculadas) para que Looker Studio no las recompute en cada carga.
 
 **Por qué BigQuery y no otra cosa:**
 - Sandbox 100% gratis, sin tarjeta de crédito.
@@ -97,7 +104,7 @@ Looker Studio (antes Google Data Studio) es la herramienta de BI gratuita de Goo
 
 **Qué hace en este proyecto:**
 - Leer las vistas de BigQuery.
-- Renderizar 4 páginas de dashboard interactivo.
+- Renderizar 6 páginas de dashboard interactivo.
 - Aplicar filtros globales (país, fecha, tipo de cliente).
 - Publicar el dashboard con un link público.
 
