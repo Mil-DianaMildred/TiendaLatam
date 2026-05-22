@@ -1,5 +1,7 @@
 # Roadmap
-Falta descripcion del roadmap, aclarar que el mi framewotk y el caso de uso
+
+Este roadmap te va a llevar, paso a paso, por el proceso que seguí para este análisis: desde la construcción técnica, pasando por el análisis de datos, hasta el resultado final. Te dará una mirada al proceso que realicé y te permitirá replicarlo si así lo deseas. Estoy feliz de responder cualquier pregunta o recibir feedback en cualquier momento; puedes contactarme a mi correo electrónico: dianamildred.dsgn@gmail.com.
+
 ---
 ## Setup y exploración (Foundation)
 
@@ -19,107 +21,43 @@ Tareas:
 
 ---
 
-## Data Strategy - Preguntas de negocio 
+## Data Strategy - definir Preguntas de negocio 
 
 **Objetivo:** Definir las preguntas que el negocios debe responder en base a la mision y estrategia de la compañia. 
 
 Tareas:
-- Consultar la mission y estrategias que la compañia tiene para alinear caulquier estructuracion de data e insights que generen valor en la direccion de que la compañia busca.
-- Genera con AI y con `early_notes` una lista de preguntas que esten alineadas al tipo de producto y a la estrategia de la compania `business_questions`.
-- Genera con AI los queries que van a responder a las `business_questions` basados en el dataset que tienes. (`growth_metrics`, `retention_rfm`,`more_insights`, REVISAR SI MAS)
+- Consultar la mission y estrategias que la compañia tiene para alinear caulquier estructuracion de data e insights que generen valor en la direccion de que la compañia busca. En este caso yo construi una mission y strategia hipotetica.
+- Construye en base a `early_notes` una lista de preguntas que esten alineadas al tipo de producto y a la estrategia de la compania `business_questions`. Usa AI para encontrar preguntas que no te habias hecho antes
+- Identificar las metricas de negocio para la industria del producto, con AI valida cuales puedes construir en base al dataset existente `reference_metrics.md`
+- Construye los queries que van a responder a las `business_questions` basados en el dataset.
 
 ---
 
-## Métricas de Growth
+## Responder las preguntas de negocio
 
-**Objetivo:** responder las preguntas de crecimiento del negocio.
-
-Tareas:
-- Ejecutar `sql/growth_metrics.sql`: MoM revenue growth, ticket promedio, nuevos clientes vs recurrentes, performance por país y por canal.
-- Calcular la North Star Metric candidata. Mi recomendación para retail digital: "ingresos generados por clientes recurrentes en los últimos 90 días". Justifica por qué la elegiste.
-- Identificar los 3 países con mejor performance y los 3 con peor, y formular hipótesis del porqué.
-
----
-
-## Retención, cohortes y RFM
-
-**Objetivo:** este es el corazón del proyecto y lo que más impresiona en una entrevista de PM.
-
-Tareas:
-- Ejecutar `sql/retention_rfm.sql`: análisis de cohortes mensuales (porcentaje de clientes que vuelven a comprar en mes 1, 3, 6, 12), segmentación RFM (Recency, Frequency, Monetary) y churn rate por segmento.
-- Construir el perfil de los 8 segmentos RFM: Champions, Loyal, At Risk, New/Promising, About to Sleep, Needs Attention, Hibernating, Lost. Calcular cuántos hay, cuánto facturan y qué porcentaje del revenue total representan. (Referencia: Champions son 132 clientes que concentran el 56.4% del revenue.)
-- Calcular LTV promedio por tipo de cliente (Minorista, Mayorista, Corporativo, VIP).
-
----
+- Responder a todas las preguntas de negocio usando los queries construidos y documenta los hallazgos, preguntas y gaps que encuentras `business_questions.md`
 
 ## Dashboard en Looker Studio
 
 **Objetivo:** materializar los hallazgos en un dashboard ejecutivo publicado en la nube.
 
 Tareas:
+- En base a las queries construidas genera con AI las vistas calculadas de Bigquery que te van a ayudar facilitar las conexion con Looker studio.
 - Abrir Looker Studio (lookerstudio.google.com) con la misma cuenta de Google.
-- Conectar como fuentes de datos las 5 vistas que creamos en BigQuery: `v_orders_enriched`, `v_order_lines`, `v_rfm_segments`, `v_cohort_retention`, `v_monthly_metrics`.
-- Construir 4 páginas siguiendo `docs/dashboard_design.md`:
-  1. **Resumen Ejecutivo** — KPIs principales (Revenue, Órdenes, AOV, Clientes Activos), tendencia mensual y mapa de revenue por país.
-  2. **Growth** — MoM growth, nuevos vs recurrentes, retención mes-1.
-  3. **Producto** — Top categorías, treemap por producto, ABC analysis, alertas de stock.
-  4. **Clientes (RFM)** — Distribución de segmentos, heatmap de cohortes, lista de clientes en riesgo.
-- Añadir filtros globales: país, rango de fechas, tipo de cliente.
-- Aplicar la paleta de colores definida en `docs/dashboard_design.md`.
-- Crear al menos 2 campos calculados (% Cancelación, Es Champion) para mostrar dominio de la herramienta.
+- Conectar como fuentes de datos las vistas que creamos en BigQuery: `v_orders_enriched`, `v_order_lines`, `v_rfm_segments`, `v_cohort_retention`, `v_monthly_metrics`, `stock_alerts`, `executive_health`, `customer_funnel`, `abc_classification`, `country_performance`, `country_clienttype_perfomance`.
+- Definir la estructura del dashboard en borrador para entender el tipo de grafica que mejor representa la informacion que se quiere representar
+1. **Overview — KPIs principales (Revenue, Órdenes, AOV, Clientes Activos), tendencia mensual y mapa de revenue por país.
+2. **Orders and operations** - Total orders, valid orders, orders placed in the las 180 days, % delivered, % in progress, % problem orders, % cancelled, % returned. operational performance by country, cancellation distribution by country, montly orders by country. 
+3. **Products aand catalog** — Top categorías, treemap por producto, ABC analysis, alertas de stock.
+4. **Growth** — MoM growth, nuevos vs recurrentes, retención mes-1.
+5. **Retention and cohorts** - Revenue AOV, churn rate, retention by cohort, revenue recurring vs new clients, revenue by country, AOV by client type.
+6. **Clientes** — Distribución de segmentos, heatmap de cohortes, lista de clientes en riesgo, distribucion por tipo de usuario. 
+- Contruir 8 paginas siguiendo la estructura definida `docs/dashboard_design.md`
 
----
+## Roadmap
 
-## Informe final
-
-pendiente
-
----
-
-## Storytelling y publicación
-
-**Objetivo:** convertir el proyecto en una pieza de portafolio digna de un PM senior.
+**Objetivo:** sintetizar los hallasgos y construir un roadmap priorizado.
 
 Tareas:
-- Escribir el caso de estudio para tu sitio web siguiendo esta estructura:
-  - **Contexto** — ¿qué es TiendaLatam y por qué importa el problema?
-  - **Tu rol** — Te posicionas como PM hipotético del negocio.
-  - **Preguntas que respondiste** — Las 15 preguntas con un teaser de cada respuesta.
-  - **Hallazgos clave** — 3-5 insights con visual de soporte.
-  - **Recomendaciones de producto** — 3 features o experimentos propuestos con priorización (RICE o ICE).
-  - **Qué haría diferente con más tiempo** — Mostrar criterio.
-- Publicar el dashboard de Looker Studio con "Cualquier persona con el enlace puede ver" + copiar link.
-- Embebir el iframe en tu sitio web (botón Compartir → Insertar informe).
-- Crear repo de GitHub público con el código SQL y el README.
-- Publicar el caso de estudio en tu website con el dashboard incrustado.
-
-Entregable: caso de estudio publicado + repo de GitHub + dashboard accesible.
-
-Tiempo estimado: 4-5 horas.
-
-Tip PM: el storytelling pesa más que la técnica. Un análisis perfecto sin narrativa pasa desapercibido; un análisis bueno con narrativa clara abre puertas. Cuando escribas, piensa en un reclutador que dedica 90 segundos a tu portafolio.
-
----
-
-## Cómo este proyecto fortalece tu perfil PM
-
-Lo que demuestra cada parte:
-
-| Skill PM | Dónde lo demuestras |
-|----------|---------------------|
-| Data fluency | Queries SQL no triviales (cohortes, RFM, ventanas) |
-| Definición de métricas | North Star Metric justificada + KPI hierarchy |
-| Pensamiento de negocio | Hallazgos accionables, no descripciones |
-| Segmentación de usuarios | RFM + caracterización de personas |
-| Priorización | Frameworks RICE/ICE en las recomendaciones |
-| Storytelling | Caso de estudio en website |
-| Stakeholder communication | Dashboard ejecutivo con jerarquía clara |
-
-## Extensiones opcionales (si te sobra tiempo)
-
-- Crear un PRD ficticio para 1 de las 3 recomendaciones de producto.
-- Diseñar un experimento A/B para validar una hipótesis de retención.
-- Hacer un análisis competitivo de TiendaLatam vs tiendas locales de cada país y vs players regionales (Mercado Libre, Falabella, Linio) — el diferenciador clave es precio.
-- Construir un funnel ficticio (visitas → carrito → checkout → entregado) e identificar el cuello de botella.
-- Forecast simple de revenue con función LAG/LEAD o regresión lineal en Power BI.
-
+- Proponer accionables para la compania en base a los hallazgos
+- Priopriza los accionables en base a la estrategia de la compañia utilizando el framework ICE. `business_roadmap.d`

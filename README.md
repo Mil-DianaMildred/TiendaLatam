@@ -1,10 +1,18 @@
 # TiendaLatam — Análisis de Growth & Retención
 
-Análisis end-to-end del pivote estratégico de TiendaLatam: una empresa de retail que comenzó con tiendas presenciales y ha migrado su operación a un modelo 100% digital en 10 países de Latinoamérica. El proyecto identifica palancas de crecimiento, analiza retención de clientes y construye un dashboard ejecutivo en Looker Studio.
+Análisis end-to-end del pivote estratégico de TiendaLatam: una empresa de retail que comenzó con tiendas presenciales y ha migrado su operación a un modelo 100% digital en 10 países de Latinoamérica. El proyecto identifica palancas de crecimiento, analiza retención de clientes y construye un dashboard ejecutivo en Looker Studio desde los datos crudos. 
 
 ## El problema de negocio
 
-TiendaLatam es una empresa de retail que nació como cadena de tiendas presenciales y ha completado su transición a un modelo 100% digital en 10 países de Latinoamérica (Argentina, Bolivia, Brasil, Chile, Colombia, Costa Rica, Ecuador, México, Perú y Uruguay). Sus tiendas se reconvirtieron en centros de distribución logística —uno por país— eliminando el costo del modelo presencial para trasladarlo al precio. Para el 2026, el equipo directivo está formalizando este pivote con una estrategia orientada a competir exclusivamente por precio online. El análisis busca responder tres preguntas clave:
+TiendaLatam es una empresa de retail que nació como cadena de tiendas presenciales y ha completado su transición a un modelo 100% digital en 10 países de Latinoamérica (Argentina, Bolivia, Brasil, Chile, Colombia, Costa Rica, Ecuador, México, Perú y Uruguay). Sus tiendas se reconvirtieron en centros de distribución logística, eliminando el costo del modelo presencial para trasladarlo al precio. Para el 2026, el equipo directivo está formalizando este pivote con una estrategia orientada a competir exclusivamente por precio online.
+
+Las apuestas del negocio para este pivot son:
+- Precio competitivo como promesa no negociable.
+- Convertir el primer pedido en una relación duradera.
+- Priorizar mercados donde el precio duele más.
+- Reducir dependencia de Tecnología.
+
+ El análisis busca responder tres preguntas clave para construir un roadmap basado en datos:
 
 1. ¿De dónde viene el crecimiento real y dónde estamos perdiendo clientes?
 2. ¿Qué segmentos de clientes generan más valor a largo plazo (LTV) y cuáles están en riesgo de churn?
@@ -14,8 +22,8 @@ TiendaLatam es una empresa de retail que nació como cadena de tiendas presencia
 
 | Capa | Herramienta | Por qué |
 |------|------------|---------|
-| Almacenamiento + SQL | Google BigQuery (sandbox gratis) | Data warehouse serverless, sin instalación, SQL estándar |
-| Visualización | Looker Studio | BI tool gratuita de Google, conector nativo a BigQuery, dashboards compartibles vía link público |
+| Almacenamiento + SQL | Google BigQuery | Data warehouse serverless, sin instalación, SQL estándar |
+| Visualización | Looker Studio | Conector nativo a BigQuery, dashboards compartibles vía link público |
 
 Ver `ARCHITECTURE.md` para el diagrama completo del flujo de datos.
 
@@ -69,24 +77,94 @@ proyecto-tiendalatam/
 | countries | 10 | Países LATAM |
 | positions | 5 | Cargos del equipo |
 
-## Hallazgos principales PENDIENTE ACTUALIZAR
+# Principales Hallazgos — Apuestas Estratégicas TiendaLatam
 
-Tres hallazgos validados contra los datos: 
+---
 
-- **132 clientes Champions generan el 56.4% del revenue** total — concentración de valor más pronunciada que la regla de Pareto clásica.
-- **Ecuador y Perú lideran en revenue** ($195K y $183K respectivamente), pero **Argentina tiene el AOV más alto** ($563) a pesar de tener menos órdenes.
-- **Churn rate de 25.3%** y mediana de **74 días al 2do pedido** — la ventana de re-engagement es más corta de lo habitual, lo que favorece campañas de activación tempranas.
+## Apuesta 1 — Precio competitivo como promesa no negociable
 
-Detalles en `docs/findings_preliminary.md`.
+### #1 · La tasa de entrega es del 63.5% — 17 puntos por debajo del benchmark regional
 
-## Cómo replicarlo
+**Dato:** 16.2% de órdenes bloqueadas ≈ $316K de GMV congelado
 
-1. Crear una cuenta Google Cloud (gratis, sin tarjeta).
-2. Seguir `docs/setup_bigquery.md` para crear el proyecto `tiendalatam-casestudy` y cargar los CSVs de `data_expanded/`.
-3. Ejecutar `sql/setup_views.sql` para crear las vistas analíticas.
-4. Ejecutar las consultas exploratorias y de análisis (`sql/exploratory.sql`, `sql/growth_metrics.sql`, `sql/retention_rfm.sql`, `sql/more_insights.sql`).
-5. Conectar Looker Studio a las vistas y construir el dashboard siguiendo `docs/dashboard_design.md`.
+El precio competitivo no genera moat si 1 de cada 4 órdenes no llega. La promesa no se cumple en el momento más importante: la entrega. Un cliente que paga y no recibe no vuelve aunque el precio sea el mejor del mercado.
+
+---
+
+### #2 · 2 SKUs concentran el 46.2% del revenue — la Laptop está a 30.8 días de quiebre de stock
+
+**Dato:** Laptop Ultraliviana = 33.2% del revenue total
+
+Un quiebre de stock en el SKU líder no es un problema de inventario — es una amenaza directa a la promesa de precio. Si el producto no está disponible, el cliente va al comercio local y la hipótesis central del negocio se invalida en ese momento.
+
+---
+
+## Apuesta 2 — Convertir el primer pedido en una relación duradera
+
+### #3 · La ventana de recompra es de 74 días — después del día 90 la conversión cae abruptamente
+
+**Dato:** 61.2% hizo una segunda compra — el 38.8% restante está potencialmente perdido
+
+Hay una fecha de caducidad para convertir un comprador en cliente. Sin un flujo automático activo en el día 50, ese cliente abandona silenciosamente y el costo de adquisición queda sin recuperar.
+
+---
+
+### #4 · 132 Champions generan el 56.4% del revenue — sin protocolo de protección activo
+
+**Dato:** Concentración más extrema que la regla 80/20 clásica
+
+Perder 10 Champions duele más que perder 100 clientes nuevos. Este núcleo es el activo más valioso del negocio y también su mayor fragilidad — y hoy no tiene ningún mecanismo activo de protección documentado.
+
+---
+
+### #5 · Churn global del 23% — los Minoristas, el segmento base, churnan al 26.3%
+
+**Dato:** Benchmark e-commerce LATAM maduro: 15–20%
+
+El segmento que sostiene el negocio (63.5% del revenue) es también el que más abandona. El spread mínimo entre segmentos (23–26%) apunta a un problema sistémico de experiencia, no a un segmento puntual con mal fit.
+
+---
+
+## Apuesta 3 — Priorizar mercados donde el precio duele más
+
+### #6 · Colombia underperforma estructuralmente pese a tener el mismo tiempo de vida que México
+
+**Dato:** Revenue/mes activo: Ecuador $3,372 vs Colombia $2,084
+
+Colombia tiene un triple problema — menor revenue, mayor cancelación (6.69%) y menor AOV ($428) — que no se explica por madurez del mercado. Es un diagnóstico combinado operativo-comercial. Invertir en adquisición antes de resolver esto es desperdiciar el presupuesto.
+
+---
+
+### #7 · Ecuador es el modelo que los otros 9 mercados no están replicando
+
+**Dato:** Cancelación 3.75% · Entrega 66.6% · Revenue/mes $3,372
+
+El benchmark operativo existe dentro del propio negocio. Si Ecuador logra entregar mejor y cancelar menos con el mismo modelo, hay algo en sus procesos locales que es transferible — y que los demás mercados no están usando hoy.
+
+---
+
+## Apuesta 4 — Reducir dependencia de Tecnología
+
+### #8 · Hogar y Moda tienen ~4,000 unidades vendidas pero 3–6x menos revenue que Tecnología
+
+**Dato:** Tecnología = 54.75% del revenue — objetivo: reducir a 45%
+
+La demanda en estas categorías ya existe — el gap es de precio promedio por unidad ($60 Hogar, $36 Moda). Diversificar no requiere generar nueva demanda; requiere elevar el ticket en categorías donde los clientes ya están comprando.
+
+---
+
+### #9 · El LTV spread entre los 4 segmentos es de apenas el 17% — VIP tiene menor LTV que Minorista
+
+**Dato:** Corporativo $2,425 · Minorista $2,387 · VIP $2,347 · Mayorista $1,999
+
+Si los segmentos no se comportan distinto en valor, no son segmentos reales — son etiquetas. Esto impide diseñar propuestas de valor diferenciadas por tipo de cliente, que es exactamente lo que necesita la diversificación de catálogo para funcionar: saber quién compra qué y por cuánto.
 
 ## Sobre la autora
 
-Diana Mildred — Product Manager. Este proyecto forma parte de mi portafolio profesional.
+Diana Mildred Galindo | Product Manager and User experience expert | [LinkedIn](https://www.linkedin.com/in/diana-mildred/) | [Website](https://dianamildred.lovable.app/)
+
+"TiendaLatam es un caso de estudio hipotético que construí porque, genuinamente, me encanta envolverme en problemas, conocerlos profundamente y buscarles soluciones."
+
+## Cómo replicarlo
+
+Sigue mi roadmap te llevara desde la data cruda, hasta un roadmap de producto listo ejecutar. `ROADMAP.md`
