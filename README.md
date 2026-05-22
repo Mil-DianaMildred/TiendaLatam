@@ -82,6 +82,8 @@ proyecto-tiendalatam/
 
 # Key Findings — TiendaLatam Strategic Bets
 
+[Dashboard access](https://datastudio.google.com/reporting/9dec01da-addc-4921-9df1-1bff8d7a887c)
+
 ---
 
 ## Bet 1 — Competitive Pricing as a Non-Negotiable Promise
@@ -260,6 +262,7 @@ proyecto-tiendalatam/
 
 # Principales Hallazgos — Apuestas Estratégicas TiendaLatam
 
+[Dashboard access](https://datastudio.google.com/reporting/9dec01da-addc-4921-9df1-1bff8d7a887c)
 ---
 
 ## Apuesta 1 — Precio competitivo como promesa no negociable

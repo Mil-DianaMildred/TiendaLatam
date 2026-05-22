@@ -6,6 +6,8 @@ TiendaLatam nació como retail presencial y ha completado su transición a un mo
 
 **Estrategia en una línea:** Ganar en precio → retener digitalmente → expandir donde el diferencial de precio duele más → diversificar catálogo para no depender de Tecnología.
 
+[Dashboard access](https://datastudio.google.com/reporting/9dec01da-addc-4921-9df1-1bff8d7a887c)
+
 ---
 
 ## Bloque 0 — Contexto del negocio (sql/exploratory.sql)

@@ -1,5 +1,7 @@
 # TiendaLatam — Suggested Action Plan Roadmap
 
+[Dashboard access](https://datastudio.google.com/reporting/9dec01da-addc-4921-9df1-1bff8d7a887c)
+
 > **North Star Metric:** Monthly revenue from recurring customers (Shipped + Delivered orders)
 
 ---
