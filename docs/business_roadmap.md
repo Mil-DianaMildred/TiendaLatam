@@ -2,7 +2,35 @@
 
 [Dashboard access](https://datastudio.google.com/reporting/9dec01da-addc-4921-9df1-1bff8d7a887c)
 
-> **North Star Metric:** Monthly revenue from recurring customers (Shipped + Delivered orders)
+## Matriz de Priorización ICE
+
+> **North Star Metric:** Revenue mensual de clientes recurrentes (órdenes Enviado + Entregado)
+
+**Framework ICE:** Impact × Confidence × Ease (escala 1–10, score máximo = 1.000)
+
+- **Impact:** qué tanto mueve la North Star Metric (revenue mensual de recurrentes)
+- **Confidence:** qué tan respaldada está la hipótesis por los datos disponibles
+- **Ease:** inverso de costo/tiempo/complejidad de ejecución
+
+---
+
+### Tabla de priorización
+
+| # | Iniciativa | Categoría | Fase | I | C | E | Score ICE |
+|---|---|---|---|:---:|:---:|:---:|:---:|
+| 1 | Protocolo de protección a 132 Champions | Retención | 1 — Inmediato | 10 | 9 | 8 | **720** |
+| 2 | Reposición de emergencia: Laptop & Vacuum | Operaciones | 1 — Inmediato | 10 | 10 | 7 | **700** |
+| 3 | Auditar cuello de botella Pendiente + Procesando | Operaciones | 1 — Inmediato | 9 | 9 | 6 | **486** |
+| 4 | Activar 156 compradores únicos Retail | Clientes | 2 — Corto plazo | 8 | 8 | 8 | **512** |
+| 5 | Campaña de rescate segmento At Risk | Retención | 2 — Corto plazo | 8 | 7 | 8 | **448** |
+| 6 | Flujo de reactivación automático — día 50 | Retención | 2 — Corto plazo | 7 | 8 | 7 | **392** |
+| 6 | Investigar cohortes Feb–May 2025 | Retención | 3 — Mediano plazo | 8 | 7 | 7 | **392** |
+| 8 | Motor de adquisición para 64 no-compradores | Clientes | 3 — Mediano plazo | 6 | 7 | 6 | **252** |
+| 9 | Escalar Ecuador como benchmark operacional | Expansión | 3 — Mediano plazo | 7 | 8 | 5 | **280** |
+| 9 | Diagnóstico profundo de Colombia | Expansión | 2 — Corto plazo | 6 | 8 | 5 | **240** |
+| 11 | Bundle Headphones + USB-C Charger | Catálogo | 2 — Corto plazo | 5 | 7 | 9 | **315** |
+| 12 | Redefinir segmentación VIP y Wholesale | Clientes | 2 — Corto plazo | 5 | 6 | 6 | **180** |
+| 13 | Revisión de catálogo: estrategia de diversificación | Catálogo | 3 — Mediano plazo | 7 | 6 | 4 | **168** |
 
 ---
 
