@@ -8,7 +8,7 @@ This document explains how the project is organized technically: what each tool 
 
 ## Overview (in one sentence)
 
-The original CSVs are loaded into BigQuery (a cloud data warehouse), where all analysis is performed in SQL; the results are connected to Looker Studio (a BI tool), which generates an interactive dashboard accessible via a public link that can be embedded in your website.
+The original CSVs are loaded into BigQuery (a cloud data warehouse), where all analysis is performed in SQL; the results are connected to Data Studio (a BI tool), which generates an interactive dashboard accessible via a public link that can be embedded in your website.
 
 ## Architecture Diagram
 
@@ -52,7 +52,7 @@ The original CSVs are loaded into BigQuery (a cloud data warehouse), where all a
                          │  (authentication via your Google account)
                          ▼
 ┌──────────────────────────────────────────────────┐
-│            Looker Studio (BI tool)               │
+│            Data Studio (BI tool)               │
 │  ─────────────────────────────────────────────  │
 │  Report: TiendaLatam – Growth & Retention        │
 │                                                  │
@@ -89,12 +89,12 @@ BigQuery is Google's serverless data warehouse. "Serverless" means you don't man
 **What it does in this project:**
 - Stores the 11 original tables.
 - Runs all SQL queries in the analysis (the files in the `sql/` directory).
-- Materializes 9 analytical views (pre-computed queries) so Looker Studio doesn't have to recompute them on every load.
+- Materializes 9 analytical views (pre-computed queries) so Data Studio doesn't have to recompute them on every load.
 
 **Why BigQuery and not something else:**
 - 100% free Sandbox, no credit card required.
 - SQL syntax very close to PostgreSQL.
-- Native connector to Looker Studio: one click.
+- Native connector to Data Studio: one click.
 - The most widely used data warehouse in startups and tech companies across LATAM — putting your name close to that ecosystem.
 
 **What it costs:**
@@ -102,9 +102,9 @@ BigQuery is Google's serverless data warehouse. "Serverless" means you don't man
 - Queries: free up to 1 TB processed per month. Each query in this project processes kilobytes.
 - Limitation: tables in Sandbox expire after 60 days. Easy fix: reload them (10 min) or activate the free GCP trial (90 days + $300 USD in credits, does not auto-charge when it ends).
 
-### Layer 2 — Visualization & Exploration (Looker Studio)
+### Layer 2 — Visualization & Exploration (Data Studio)
 
-Looker Studio (formerly Google Data Studio) is Google's free BI tool. It lets you drag and drop fields to build visuals connected to data sources.
+Data Studio is Google's free BI tool. It lets you drag and drop fields to build visuals connected to data sources.
 
 **What it does in this project:**
 - Reads the BigQuery views.
@@ -112,7 +112,7 @@ Looker Studio (formerly Google Data Studio) is Google's free BI tool. It lets yo
 - Applies global filters (country, date, client type).
 - Publishes the dashboard via a public link.
 
-**Why Looker Studio and not Power BI / Tableau:**
+**Why Data Studio and not Power BI / Tableau:**
 - 100% web-based — no installation required, works on your Mac.
 - Free with no locked features.
 - Generates shareable public links (Power BI Free does not allow this).
@@ -120,7 +120,7 @@ Looker Studio (formerly Google Data Studio) is Google's free BI tool. It lets yo
 
 **Honest limitations:**
 - Some advanced visuals (a perfect cohort heatmap, scatter plots with rich tooltips) are less polished than in Tableau.
-- Complex calculations in Looker Studio use "calculated fields" (formula-like syntax), not DAX. The strategy here is to keep heavy calculations in SQL (BigQuery) and let Looker Studio handle visualization only.
+- Complex calculations in Data Studio use "calculated fields" (formula-like syntax), not DAX. The strategy here is to keep heavy calculations in SQL (BigQuery) and let Data Studio handle visualization only.
 
 ---
 ---
@@ -135,7 +135,7 @@ Este documento explica cómo está organizado el proyecto técnicamente: qué he
 
 ## Vista panorámica (en una frase)
 
-Los CSVs originales se cargan en BigQuery (data warehouse en la nube), donde todo el análisis se realiza en SQL; los resultados se conectan a Looker Studio (herramienta de BI), que genera un dashboard interactivo accesible mediante un link público que puede incrustarse en tu sitio web.
+Los CSVs originales se cargan en BigQuery (data warehouse en la nube), donde todo el análisis se realiza en SQL; los resultados se conectan a Data Studio (herramienta de BI), que genera un dashboard interactivo accesible mediante un link público que puede incrustarse en tu sitio web.
 
 ## Diagrama de la arquitectura
 
@@ -179,7 +179,7 @@ Los CSVs originales se cargan en BigQuery (data warehouse en la nube), donde tod
                          │  (autenticación con tu cuenta de Google)
                          ▼
 ┌──────────────────────────────────────────────────┐
-│            Looker Studio (herramienta BI)        │
+│            Data Studio (herramienta BI)        │
 │  ─────────────────────────────────────────────  │
 │  Informe: TiendaLatam – Growth & Retention       │
 │                                                  │
@@ -216,12 +216,12 @@ BigQuery es el data warehouse serverless de Google. "Serverless" significa que n
 **Qué hace en este proyecto:**
 - Almacena las 11 tablas originales.
 - Ejecuta todas las consultas SQL del análisis (los archivos en el directorio `sql/`).
-- Materializa 9 vistas analíticas (queries pre-calculados) para que Looker Studio no tenga que recomputarlos en cada carga.
+- Materializa 9 vistas analíticas (queries pre-calculados) para que Data Studio no tenga que recomputarlos en cada carga.
 
 **Por qué BigQuery y no otra herramienta:**
 - Sandbox 100% gratuito, sin tarjeta de crédito.
 - Sintaxis SQL muy cercana a PostgreSQL.
-- Conector nativo a Looker Studio: un solo clic.
+- Conector nativo a Data Studio: un solo clic.
 - Es el data warehouse más utilizado en startups y empresas tech en LATAM, lo que acerca tu perfil a ese ecosistema.
 
 **Lo que cuesta:**
@@ -229,9 +229,9 @@ BigQuery es el data warehouse serverless de Google. "Serverless" significa que n
 - Consultas: gratuitas hasta 1 TB procesado por mes. Cada consulta en este proyecto procesa kilobytes.
 - Limitación: las tablas en Sandbox expiran a los 60 días. Solución sencilla: recargarlas (10 minutos) o activar la prueba gratuita de GCP (90 días + USD $300 en créditos, no cobra automáticamente al terminar).
 
-### Capa 2 — Visualización y exploración (Looker Studio)
+### Capa 2 — Visualización y exploración (Data Studio)
 
-Looker Studio (antes Google Data Studio) es la herramienta de BI gratuita de Google. Permite arrastrar campos y construir visualizaciones conectadas a fuentes de datos.
+Data Studio es la herramienta de BI gratuita de Google. Permite arrastrar campos y construir visualizaciones conectadas a fuentes de datos.
 
 **Qué hace en este proyecto:**
 - Lee las vistas de BigQuery.
@@ -239,7 +239,7 @@ Looker Studio (antes Google Data Studio) es la herramienta de BI gratuita de Goo
 - Aplica filtros globales (país, fecha, tipo de cliente).
 - Publica el dashboard mediante un link público.
 
-**Por qué Looker Studio y no Power BI o Tableau:**
+**Por qué Data Studio y no Power BI o Tableau:**
 - 100% web: no requiere instalación y funciona en cualquier sistema operativo.
 - Gratuito sin funcionalidades bloqueadas.
 - Genera links públicos compartibles (Power BI Free no lo permite).
@@ -247,4 +247,4 @@ Looker Studio (antes Google Data Studio) es la herramienta de BI gratuita de Goo
 
 **Limitaciones honestas:**
 - Algunos visuales avanzados (un cohort heatmap perfecto, scatter plots con tooltips enriquecidos) son menos pulidos que en Tableau.
-- Los cálculos complejos en Looker Studio se realizan con "campos calculados" (sintaxis tipo fórmula), no con DAX. La estrategia aquí es dejar los cálculos pesados en SQL (BigQuery) y que Looker Studio se encargue únicamente de la visualización.
+- Los cálculos complejos en Data Studio se realizan con "campos calculados" (sintaxis tipo fórmula), no con DAX. La estrategia aquí es dejar los cálculos pesados en SQL (BigQuery) y que Data Studio se encargue únicamente de la visualización.

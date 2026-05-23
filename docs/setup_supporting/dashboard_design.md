@@ -1,6 +1,6 @@
 # Diseño del Dashboard — TiendaLatam
 
-Dashboard operativo en Looker Studio (6 páginas) organizado por dominio de dato. Cada página agrupa visualizaciones de un mismo dominio; los filtros globales permiten responder múltiples preguntas sin cambiar de página.
+Dashboard operativo en Data Studio (6 páginas) organizado por dominio de dato. Cada página agrupa visualizaciones de un mismo dominio; los filtros globales permiten responder múltiples preguntas sin cambiar de página.
 
 **Prerequisito:** haber ejecutado `sql/setup_views.sql` en BigQuery. Las 9 vistas son las únicas fuentes que conecta el dashboard.
 
@@ -8,7 +8,7 @@ Dashboard operativo en Looker Studio (6 páginas) organizado por dominio de dato
 
 ## 1. Fuentes de datos a conectar
 
-En Looker Studio → **Crear → Fuente de datos → BigQuery → tiendalatam-casestudy → tiendalatam → selecciona la vista**.
+En Data Studio → **Crear → Fuente de datos → BigQuery → tiendalatam-casestudy → tiendalatam → selecciona la vista**.
 
 | Vista | Páginas que la usan | Para qué |
 |-------|---------------------|----------|
@@ -41,9 +41,9 @@ Aplicar desde Tema y diseño → Personalizar. Define la paleta en la primera p�
 
 ---
 
-## 3. Campos calculados en Looker Studio
+## 3. Campos calculados en Data Studio
 
-Crear en la fuente indicada. En Looker Studio: editar fuente de datos → **Agregar un campo**.
+Crear en la fuente indicada. En Data Studio: editar fuente de datos → **Agregar un campo**.
 
 **En `v_orders_enriched`:**
 
@@ -307,12 +307,12 @@ En páginas que combinan múltiples fuentes (p. ej., Página 3 usa `v_orders_enr
 
 ---
 
-## 7. Trucos de Looker Studio
+## 7. Trucos de Data Studio
 
 - **Tabla pivote para cohortes**: en lugar de una tabla normal, usa Insertar → Tabla pivote. Filas = `cohort_month`, columnas = `months_since_first`, valor = `retention_pct`. Agrega escala de color al valor.
 - **Páginas ocultas**: crea páginas de detalle o anexos accesibles solo con link directo desde el menú de páginas.
 - **Anotaciones en gráficos de línea**: usa "Agregar referencia" para marcar puntos de inflexión en la línea de revenue.
-- **Mezcla de datos**: si necesitas cruzar `v_rfm_segments` con `v_orders_enriched` en una misma visual, usa el blending de Looker Studio en lugar de crear otra vista en BigQuery.
+- **Mezcla de datos**: si necesitas cruzar `v_rfm_segments` con `v_orders_enriched` en una misma visual, usa el blending de Data Studio en lugar de crear otra vista en BigQuery.
 - **Filtros cruzados**: habilitar la interacción entre gráficos (clic en una barra filtra los demás) desde Recurso → Gestionar filtros → Habilitar filtrado cruzado.
 - **Bookmarks por país o período**: duplica una página con filtros prefijados para presentaciones ejecutivas rápidas.
 

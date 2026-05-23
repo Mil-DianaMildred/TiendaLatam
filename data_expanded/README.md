@@ -66,7 +66,7 @@ Más pasos pero te da certeza absoluta del estado.
 ## Después de reemplazar
 
 1. Re-ejecuta `sql/setup_views.sql` para que las vistas analíticas se actualicen contra los nuevos datos (las vistas NO se autorrefrescan al cambiar tablas base).
-2. Refresca la fuente de datos en Looker Studio (Recurso → Administrar fuentes → Editar conexión → Aceptar). Esto detecta los nuevos volúmenes.
+2. Refresca la fuente de datos en Data Studio (Recurso → Administrar fuentes → Editar conexión → Aceptar). Esto detecta los nuevos volúmenes.
 
 ## Notas sobre los datos sintéticos
 

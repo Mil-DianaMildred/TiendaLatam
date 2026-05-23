@@ -1,10 +1,10 @@
-# Setup de BigQuery + Looker Studio
+# Setup de BigQuery + Data Studio
 
 Guía paso a paso para montar el proyecto desde cero. Sin tarjeta de crédito, sin instalaciones locales. Tiempo total estimado: 30-45 minutos la primera vez.
 
 ## Lo que vas a tener al final
 
-Una base de datos en la nube con tus 11 tablas, queries SQL listas para ejecutar en el navegador, y un dashboard en Looker Studio compartible con un link público para tu website.
+Una base de datos en la nube con tus 11 tablas, queries SQL listas para ejecutar en el navegador, y un dashboard en Data Studio compartible con un link público para tu website.
 
 ## Pre-requisitos
 
@@ -90,7 +90,7 @@ Tip de productividad: BigQuery te dice cuántos GB va a procesar antes de ejecut
 
 ## Paso 7 — Crear vistas reutilizables (opcional pero recomendado)
 
-Para que Looker Studio consuma datos pre-procesados, crea vistas (views) para tus análisis principales. Una vista en BigQuery se crea con `CREATE OR REPLACE VIEW`:
+Para que Data Studio consuma datos pre-procesados, crea vistas (views) para tus análisis principales. Una vista en BigQuery se crea con `CREATE OR REPLACE VIEW`:
 
 ```sql
 CREATE OR REPLACE VIEW `tiendalatam.v_orders_enriched` AS
@@ -118,7 +118,7 @@ WHERE o.order_status_id IN (3,4);
 
 Crear esta vista te ahorra los joins en cada visual del dashboard.
 
-## Paso 8 — Conectar Looker Studio (5 min)
+## Paso 8 — Conectar Data Studio (5 min)
 
 1. Abre [lookerstudio.google.com](https://lookerstudio.google.com) con la misma cuenta.
 2. Click **Crear → Fuente de datos**.
@@ -128,7 +128,7 @@ Crear esta vista te ahorra los joins en cada visual del dashboard.
 6. Revisa los tipos detectados (asegúrate que las fechas estén como tipo Fecha, no como texto).
 7. Click **Crear informe**.
 
-Repite el paso para cada tabla/vista que necesites en el dashboard. Una práctica común: crea un "informe" en Looker Studio con varias fuentes de datos, y úsalas para distintos visuales.
+Repite el paso para cada tabla/vista que necesites en el dashboard. Una práctica común: crea un "informe" en Data Studio con varias fuentes de datos, y úsalas para distintos visuales.
 
 ---
 
@@ -151,6 +151,6 @@ Tres puntos junto a la tabla → Eliminar.
 
 **Las fechas se cargaron como STRING:** ve a la tabla → pestaña Esquema → edita el campo registration_date a tipo DATE. Si no permite, recarga la tabla con autodetect = falso y schema manual.
 
-**Looker Studio dice "Sin acceso al proyecto":** vuelve a la consola GCP → IAM → asegura que tu cuenta tenga rol "BigQuery Data Viewer" + "BigQuery Job User".
+**Data Studio dice "Sin acceso al proyecto":** vuelve a la consola GCP → IAM → asegura que tu cuenta tenga rol "BigQuery Data Viewer" + "BigQuery Job User".
 
 **Las consultas tardan mucho:** revisa que estés filtrando por fecha cuando sea posible. BigQuery cobra por bytes escaneados, así que la práctica de PM es escribir queries selectivas.

@@ -39,13 +39,13 @@ Tasks:
 
 ---
 
-## Phase 3 — Dashboard in Looker Studio
+## Phase 3 — Dashboard in Data Studio
 
 **Objective:** Materialize the findings in an executive dashboard published in the cloud.
 
 Tasks:
-- Based on the queries built, use AI to generate calculated BigQuery views that will simplify the connection with Looker Studio.
-- Open Looker Studio (lookerstudio.google.com) with the same Google account.
+- Based on the queries built, use AI to generate calculated BigQuery views that will simplify the connection with Data Studio.
+- Open Data Studio (lookerstudio.google.com) with the same Google account.
 - Connect the following BigQuery views as data sources: `v_orders_enriched`, `v_order_lines`, `v_rfm_segments`, `v_cohort_retention`, `v_monthly_metrics`, `stock_alerts`, `executive_health`, `customer_funnel`, `abc_classification`, `country_performance`, `country_clienttype_performance`.
 - Define the dashboard structure in draft form to identify the chart type that best represents each piece of information:
   1. **Resumen ejecutivo** — KPIs principales (revenue, órdenes, AOV, clientes activos), tendencia mensual y mapa de revenue por país.
@@ -110,13 +110,13 @@ Tareas:
 
 ---
 
-## Fase 3 — Dashboard en Looker Studio
+## Fase 3 — Dashboard en Data Studio
 
 **Objetivo:** Materializar los hallazgos en un dashboard ejecutivo publicado en la nube.
 
 Tareas:
-- A partir de los queries construidos, generar con IA las vistas calculadas de BigQuery que facilitarán la conexión con Looker Studio.
-- Abrir Looker Studio (lookerstudio.google.com) con la misma cuenta de Google.
+- A partir de los queries construidos, generar con IA las vistas calculadas de BigQuery que facilitarán la conexión con Data Studio.
+- Abrir Data Studio (lookerstudio.google.com) con la misma cuenta de Google.
 - Conectar las siguientes vistas de BigQuery como fuentes de datos: `v_orders_enriched`, `v_order_lines`, `v_rfm_segments`, `v_cohort_retention`, `v_monthly_metrics`, `stock_alerts`, `executive_health`, `customer_funnel`, `abc_classification`, `country_performance`, `country_clienttype_performance`.
 - Definir la estructura del dashboard en borrador para identificar el tipo de gráfica que mejor representa cada pieza de información:
   1. **Resumen ejecutivo** — KPIs principales (revenue, órdenes, AOV, clientes activos), tendencia mensual y mapa de revenue por país.
@@ -176,13 +176,13 @@ Tareas:
 
 - Responder a todas las preguntas de negocio usando los queries construidos y documenta los hallazgos, preguntas y gaps que encuentras `business_questions.md`
 
-## Dashboard en Looker Studio
+## Dashboard en Data Studio
 
 **Objetivo:** materializar los hallazgos en un dashboard ejecutivo publicado en la nube.
 
 Tareas:
-- En base a las queries construidas genera con AI las vistas calculadas de Bigquery que te van a ayudar facilitar las conexion con Looker studio.
-- Abrir Looker Studio (lookerstudio.google.com) con la misma cuenta de Google.
+- En base a las queries construidas genera con AI las vistas calculadas de Bigquery que te van a ayudar facilitar las conexion con Data Studio.
+- Abrir Data Studio (lookerstudio.google.com) con la misma cuenta de Google.
 - Conectar como fuentes de datos las vistas que creamos en BigQuery: `v_orders_enriched`, `v_order_lines`, `v_rfm_segments`, `v_cohort_retention`, `v_monthly_metrics`, `stock_alerts`, `executive_health`, `customer_funnel`, `abc_classification`, `country_performance`, `country_clienttype_perfomance`.
 - Definir la estructura del dashboard en borrador para entender el tipo de grafica que mejor representa la informacion que se quiere representar
 1. **Overview — KPIs principales (Revenue, Órdenes, AOV, Clientes Activos), tendencia mensual y mapa de revenue por país.

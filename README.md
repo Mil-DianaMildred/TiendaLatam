@@ -4,7 +4,7 @@
 
 # TiendaLatam — Growth & Retention Analysis
 
-End-to-end analysis of TiendaLatam's strategic pivot: a retail company that started with physical stores and has migrated its operations to a 100% digital model across 10 countries in Latin America. The project identifies growth levers, analyzes customer retention, and builds an executive dashboard in Looker Studio from raw data.
+End-to-end analysis of TiendaLatam's strategic pivot: a retail company that started with physical stores and has migrated its operations to a 100% digital model across 10 countries in Latin America. The project identifies growth levers, analyzes customer retention, and builds an executive dashboard in Data Studio from raw data.
 
 ## The Business Problem
 
@@ -26,7 +26,7 @@ The analysis aims to answer three key questions to build a data-driven roadmap:
 | Layer | Tool | Why |
 |-------|------|-----|
 | Storage + SQL | Google BigQuery | Serverless data warehouse, no setup required, standard SQL |
-| Visualization | Looker Studio | Native BigQuery connector, shareable dashboards via public link |
+| Visualization | Data Studio | Native BigQuery connector, shareable dashboards via public link |
 
 See `ARCHITECTURE.md` for the complete data flow diagram.
 
@@ -37,11 +37,11 @@ proyecto-tiendalatam/
 ├── README.md                           # This file
 ├── ROADMAP.md                          # Execution plan
 ├── ARCHITECTURE.md                     # Data flow diagram
-├── image.png                           # Looker Studio dashboard screenshot
+├── image.png                           # Data Studio dashboard screenshot
 ├── data_expanded/                      # Dataset CSVs (11 tables, ~17k rows)
 │   └── README.md                       # Description of each CSV file
 ├── sql/
-│   ├── setup_views.sql                 # 9 analytical views for Looker Studio
+│   ├── setup_views.sql                 # 9 analytical views for Data Studio
 │   ├── schema.sql                      # Postgres DDL (reference, not used in BQ)
 │   ├── exploratory.sql                 # Initial dataset exploration
 │   ├── growth_metrics.sql              # Growth KPIs
@@ -61,7 +61,7 @@ proyecto-tiendalatam/
     ├── product_growth_metrics_ref.md   # Product growth metrics reference
     ├── findings_preliminary.md         # Findings executed against real data
     ├── early_notes.md                  # Initial exploratory notes
-    └── dashboard_design.md             # Looker Studio dashboard structure
+    └── dashboard_design.md             # Data Studio dashboard structure
 ```
 
 ## Dataset
@@ -183,7 +183,7 @@ Follow my roadmap, which will take you from raw data to a product roadmap ready 
 
 # TiendaLatam — Análisis de Growth & Retención
 
-Análisis end-to-end del pivote estratégico de TiendaLatam: una empresa de retail que comenzó con tiendas presenciales y ha migrado su operación a un modelo 100% digital en 10 países de Latinoamérica. El proyecto identifica palancas de crecimiento, analiza la retención de clientes y construye un dashboard ejecutivo en Looker Studio a partir de los datos crudos.
+Análisis end-to-end del pivote estratégico de TiendaLatam: una empresa de retail que comenzó con tiendas presenciales y ha migrado su operación a un modelo 100% digital en 10 países de Latinoamérica. El proyecto identifica palancas de crecimiento, analiza la retención de clientes y construye un dashboard ejecutivo en Data Studio a partir de los datos crudos.
 
 ## El problema de negocio
 
@@ -206,7 +206,7 @@ El análisis busca responder tres preguntas clave para construir un roadmap basa
 | Capa | Herramienta | Por qué |
 |------|------------|---------|
 | Almacenamiento + SQL | Google BigQuery | Data warehouse serverless, sin instalación, SQL estándar |
-| Visualización | Looker Studio | Conector nativo a BigQuery, dashboards compartibles vía link público |
+| Visualización | Data Studio | Conector nativo a BigQuery, dashboards compartibles vía link público |
 
 Ver `ARCHITECTURE.md` para el diagrama completo del flujo de datos.
 
@@ -217,11 +217,11 @@ proyecto-tiendalatam/
 ├── README.md                           # Este archivo
 ├── ROADMAP.md                          # Plan de ejecución de 5 días
 ├── ARCHITECTURE.md                     # Diagrama del flujo de datos
-├── image.png                           # Captura del dashboard en Looker Studio
+├── image.png                           # Captura del dashboard en Data Studio
 ├── data_expanded/                      # CSVs del dataset (11 tablas, ~17k filas)
 │   └── README.md                       # Descripción de cada archivo CSV
 ├── sql/
-│   ├── setup_views.sql                 # 9 vistas analíticas para Looker Studio
+│   ├── setup_views.sql                 # 9 vistas analíticas para Data Studio
 │   ├── schema.sql                      # DDL Postgres (referencia, no usado en BQ)
 │   ├── exploratory.sql                 # Exploración inicial del dataset
 │   ├── growth_metrics.sql              # KPIs de crecimiento
@@ -241,7 +241,7 @@ proyecto-tiendalatam/
     ├── product_growth_metrics_ref.md   # Referencia de métricas de product growth
     ├── findings_preliminary.md         # Hallazgos ejecutados contra los datos reales
     ├── early_notes.md                  # Notas exploratorias iniciales
-    └── dashboard_design.md             # Estructura del dashboard en Looker Studio
+    └── dashboard_design.md             # Estructura del dashboard en Data Studio
 ```
 
 ## Dataset
@@ -355,7 +355,7 @@ Sigue mi roadmap, que te llevará desde la data cruda hasta un roadmap de produc
 
 # TiendaLatam — Análisis de Growth & Retención
 
-Análisis end-to-end del pivote estratégico de TiendaLatam: una empresa de retail que comenzó con tiendas presenciales y ha migrado su operación a un modelo 100% digital en 10 países de Latinoamérica. El proyecto identifica palancas de crecimiento, analiza retención de clientes y construye un dashboard ejecutivo en Looker Studio desde los datos crudos. 
+Análisis end-to-end del pivote estratégico de TiendaLatam: una empresa de retail que comenzó con tiendas presenciales y ha migrado su operación a un modelo 100% digital en 10 países de Latinoamérica. El proyecto identifica palancas de crecimiento, analiza retención de clientes y construye un dashboard ejecutivo en Data Studio desde los datos crudos. 
 
 ## El problema de negocio
 
@@ -378,7 +378,7 @@ Las apuestas del negocio para este pivot son:
 | Capa | Herramienta | Por qué |
 |------|------------|---------|
 | Almacenamiento + SQL | Google BigQuery | Data warehouse serverless, sin instalación, SQL estándar |
-| Visualización | Looker Studio | Conector nativo a BigQuery, dashboards compartibles vía link público |
+| Visualización | Data Studio | Conector nativo a BigQuery, dashboards compartibles vía link público |
 
 Ver `ARCHITECTURE.md` para el diagrama completo del flujo de datos.
 
@@ -389,11 +389,11 @@ proyecto-tiendalatam/
 ├── README.md                           # Este archivo
 ├── ROADMAP.md                          # Plan de ejecución
 ├── ARCHITECTURE.md                     # Diagrama del flujo de datos
-├── image.png                           # Captura del dashboard en Looker Studio
+├── image.png                           # Captura del dashboard en Data Studio
 ├── data_expanded/                      # CSVs del dataset (11 tablas, ~17k filas)
 │   └── README.md                       # Descripción de cada archivo CSV
 ├── sql/
-│   ├── setup_views.sql                 # 9 vistas analíticas para Looker Studio
+│   ├── setup_views.sql                 # 9 vistas analíticas para Data Studio
 │   ├── schema.sql                      # DDL Postgres (referencia, no usado en BQ)
 │   ├── exploratory.sql                 # Exploración inicial del dataset
 │   ├── growth_metrics.sql              # KPIs de crecimiento
@@ -413,7 +413,7 @@ proyecto-tiendalatam/
     ├── product_growth_metrics_ref.md   # Referencia de métricas de product growth
     ├── findings_preliminary.md         # Hallazgos ejecutados contra los datos reales
     ├── early_notes.md                  # Notas exploratorias iniciales
-    └── dashboard_design.md             # Estructura del dashboard en Looker Studio
+    └── dashboard_design.md             # Estructura del dashboard en Data Studio
 ```
 
 ## Dataset
